@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="icpn.png">
+	<meta name="description" content="國立臺灣大學台大盃羽球賽報名系統">
+	<meta name="author" content="國立臺灣大學羽球校隊">
+	<title>國立臺灣大學台大盃羽球賽</title>
+	<link href="bootstrap.min.css" rel="stylesheet">
+	<link href="custom.css" rel="stylesheet">
+</head>
+<body>
+	<header>
+		<div class="container">
+			<h1 class="center">2017台大盃羽球賽報名表-團體</h1>
+		</div>
+	</header>
+
+	<section class="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-2 center">
+					<p>系所：<input class="no-empty" type="text" id="Gmajor" /></p>
+				</div>
+				<div class="col-sm-4 center">
+					<p>隊名：<input class="no-empty" type="text" id="Gname" /></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-9 col-sm-offset-2">
+					<table class="middle_box">
+						<tr>
+							<th></th><th>學號</th><th>姓名</th><th>系別</th><th>年級</th><th>性別</th><th>出生日期</th><th>身分證字號</th><th>聯絡電話</th>
+						</tr>
+						<tr>
+							<td>隊長</td>
+							<td><input class="no-empty" type="text" id="id1" /></td>
+							<td><input class="no-empty" type="text" id="name1" /></td>
+							<td><input class="no-empty" type="text" id="major1" /></td>
+							<td><select class="no-empty" id="grade1">
+								<option value=""></option>
+								<option value="B1">大一</option><option value="B2">大二</option>
+								<option value="B3">大三</option><option value="B4">大四</option>
+								<option value="B5">大五</option><option value="B6">大六</option>
+								<option value="B7">大七</option><option value="R1">碩一</option>
+								<option value="R2">碩二</option><option value="R3">碩三</option>
+								<option value="R4">碩四</option><option value="D1">博一</option>
+								<option value="D2">博二</option><option value="D3">博三</option>
+								<option value="D4">博四</option><option value="D5">博五</option>
+								<option value="D6">博六</option><option value="D7">博七</option>
+							</select></td>
+							<td><select class="no-empty" id="sex1"><option value=""></option><option value="M">男</option><option value="F">女</option></td>
+							<td><input class="no-empty" type="text" id="birth1" placeholder="1999-1-1" /></td>
+							<td><input class="no-empty" type="text" id="identity1" /></td>
+							<td><input class="no-empty" type="text" id="phone1" /></td>
+						</tr>
+						<tr>
+							<td>隊員</td>
+							<td><input class="no-empty" type="text" id="id2" /></td>
+							<td><input class="no-empty" type="text" id="name2" /></td>
+							<td><input class="no-empty" type="text" id="major2" /></td>
+							<td><select class="no-empty" id="grade2">
+								<option value=""></option>
+								<option value="B1">大一</option><option value="B2">大二</option>
+								<option value="B3">大三</option><option value="B4">大四</option>
+								<option value="B5">大五</option><option value="B6">大六</option>
+								<option value="B7">大七</option><option value="R1">碩一</option>
+								<option value="R2">碩二</option><option value="R3">碩三</option>
+								<option value="R4">碩四</option><option value="D1">博一</option>
+								<option value="D2">博二</option><option value="D3">博三</option>
+								<option value="D4">博四</option><option value="D5">博五</option>
+								<option value="D6">博六</option><option value="D7">博七</option>
+							</select></td>
+							<td><select class="no-empty" id="sex2"><option value=""></option><option value="M">男</option><option value="F">女</option></td>
+							<td><input class="no-empty" type="text" id="birth2" placeholder="1999-1-1" /></td>
+							<td><input class="no-empty" type="text" id="identity2" /></td>
+							<td><input type="text" id="phone2" /></td>
+						</tr>
+						<tr>
+							<td>隊員</td>
+							<td><input class="no-empty" type="text" id="id3" /></td>
+							<td><input class="no-empty" type="text" id="name3" /></td>
+							<td><input class="no-empty" type="text" id="major3" /></td>
+							<td><select class="no-empty" id="grade3">
+								<option value=""></option>
+								<option value="B1">大一</option><option value="B2">大二</option>
+								<option value="B3">大三</option><option value="B4">大四</option>
+								<option value="B5">大五</option><option value="B6">大六</option>
+								<option value="B7">大七</option><option value="R1">碩一</option>
+								<option value="R2">碩二</option><option value="R3">碩三</option>
+								<option value="R4">碩四</option><option value="D1">博一</option>
+								<option value="D2">博二</option><option value="D3">博三</option>
+								<option value="D4">博四</option><option value="D5">博五</option>
+								<option value="D6">博六</option><option value="D7">博七</option>
+							</select></td>
+							<td><select class="no-empty" id="sex3"><option value=""></option><option value="M">男</option><option value="F">女</option></td>
+							<td><input class="no-empty" type="text" id="birth3" placeholder="1999-1-1" /></td>
+							<td><input class="no-empty" type="text" id="identity3" /></td>
+							<td><input type="text" id="phone3" /></td>
+						</tr>
+						<tr>
+							<td>隊員</td>
+							<td><input class="no-empty" type="text" id="id4" /></td>
+							<td><input class="no-empty" type="text" id="name4" /></td>
+							<td><input class="no-empty" type="text" id="major4" /></td>
+							<td><select class="no-empty" id="grade4">
+								<option value=""></option>
+								<option value="B1">大一</option><option value="B2">大二</option>
+								<option value="B3">大三</option><option value="B4">大四</option>
+								<option value="B5">大五</option><option value="B6">大六</option>
+								<option value="B7">大七</option><option value="R1">碩一</option>
+								<option value="R2">碩二</option><option value="R3">碩三</option>
+								<option value="R4">碩四</option><option value="D1">博一</option>
+								<option value="D2">博二</option><option value="D3">博三</option>
+								<option value="D4">博四</option><option value="D5">博五</option>
+								<option value="D6">博六</option><option value="D7">博七</option>
+							</select></td>
+							<td><select class="no-empty" id="sex4"><option value=""></option><option value="M">男</option><option value="F">女</option></td>
+							<td><input class="no-empty" type="text" id="birth4" placeholder="1999-1-1" /></td>
+							<td><input class="no-empty" type="text" id="identity4" /></td>
+							<td><input type="text" id="phone4" /></td>
+						</tr>
+						<tr>
+							<td>隊員</td>
+							<td><input class="no-empty" type="text" id="id5" /></td>
+							<td><input class="no-empty" type="text" id="name5" /></td>
+							<td><input class="no-empty" type="text" id="major5" /></td>
+							<td><select class="no-empty" id="grade5">
+								<option value=""></option>
+								<option value="B1">大一</option><option value="B2">大二</option>
+								<option value="B3">大三</option><option value="B4">大四</option>
+								<option value="B5">大五</option><option value="B6">大六</option>
+								<option value="B7">大七</option><option value="R1">碩一</option>
+								<option value="R2">碩二</option><option value="R3">碩三</option>
+								<option value="R4">碩四</option><option value="D1">博一</option>
+								<option value="D2">博二</option><option value="D3">博三</option>
+								<option value="D4">博四</option><option value="D5">博五</option>
+								<option value="D6">博六</option><option value="D7">博七</option>
+							</select></td>
+							<td><select class="no-empty" id="sex5"><option value=""></option><option value="M">男</option><option value="F">女</option></td>
+							<td><input class="no-empty" type="text" id="birth5" placeholder="1999-1-1" /></td>
+							<td><input class="no-empty" type="text" id="identity5" /></td>
+							<td><input type="text" id="phone5" /></td>
+						</tr>
+						<tr>
+							<td>隊員</td>
+							<td><input class="no-empty" type="text" id="id6" /></td>
+							<td><input class="no-empty" type="text" id="name6" /></td>
+							<td><input class="no-empty" type="text" id="major6" /></td>
+							<td><select class="no-empty" id="grade6">
+								<option value=""></option>
+								<option value="B1">大一</option><option value="B2">大二</option>
+								<option value="B3">大三</option><option value="B4">大四</option>
+								<option value="B5">大五</option><option value="B6">大六</option>
+								<option value="B7">大七</option><option value="R1">碩一</option>
+								<option value="R2">碩二</option><option value="R3">碩三</option>
+								<option value="R4">碩四</option><option value="D1">博一</option>
+								<option value="D2">博二</option><option value="D3">博三</option>
+								<option value="D4">博四</option><option value="D5">博五</option>
+								<option value="D6">博六</option><option value="D7">博七</option>
+							</select></td>
+							<td><select class="no-empty" id="sex6"><option value=""></option><option value="M">男</option><option value="F">女</option></td>
+							<td><input class="no-empty" type="text" id="birth6" placeholder="1999-1-1" /></td>
+							<td><input class="no-empty" type="text" id="identity6" /></td>
+							<td><input type="text" id="phone6" /></td>
+						</tr>
+						<tr>
+							<td>隊員</td>
+							<td><input class="no-empty" type="text" id="id7" /></td>
+							<td><input class="no-empty" type="text" id="name7" /></td>
+							<td><input class="no-empty" type="text" id="major7" /></td>
+							<td><select class="no-empty" id="grade7">
+								<option value=""></option>
+								<option value="B1">大一</option><option value="B2">大二</option>
+								<option value="B3">大三</option><option value="B4">大四</option>
+								<option value="B5">大五</option><option value="B6">大六</option>
+								<option value="B7">大七</option><option value="R1">碩一</option>
+								<option value="R2">碩二</option><option value="R3">碩三</option>
+								<option value="R4">碩四</option><option value="D1">博一</option>
+								<option value="D2">博二</option><option value="D3">博三</option>
+								<option value="D4">博四</option><option value="D5">博五</option>
+								<option value="D6">博六</option><option value="D7">博七</option>
+							</select></td>
+							<td><select class="no-empty" id="sex7"><option value=""></option><option value="M">男</option><option value="F">女</option></td>
+							<td><input class="no-empty" type="text" id="birth7" placeholder="1999-1-1" /></td>
+							<td><input class="no-empty" type="text" id="identity7" /></td>
+							<td><input type="text" id="phone7" /></td>
+						</tr>
+						<tr>
+							<td>隊員</td>
+							<td><input class="no-empty" type="text" id="id8" /></td>
+							<td><input class="no-empty" type="text" id="name8" /></td>
+							<td><input class="no-empty" type="text" id="major8" /></td>
+							<td><select class="no-empty" id="grade8">
+								<option value=""></option>
+								<option value="B1">大一</option><option value="B2">大二</option>
+								<option value="B3">大三</option><option value="B4">大四</option>
+								<option value="B5">大五</option><option value="B6">大六</option>
+								<option value="B7">大七</option><option value="R1">碩一</option>
+								<option value="R2">碩二</option><option value="R3">碩三</option>
+								<option value="R4">碩四</option><option value="D1">博一</option>
+								<option value="D2">博二</option><option value="D3">博三</option>
+								<option value="D4">博四</option><option value="D5">博五</option>
+								<option value="D6">博六</option><option value="D7">博七</option>
+							</select></td>
+							<td><select class="no-empty" id="sex8"><option value=""></option><option value="M">男</option><option value="F">女</option></td>
+							<td><input class="no-empty" type="text" id="birth8" placeholder="1999-1-1" /></td>
+							<td><input class="no-empty" type="text" id="identity8" /></td>
+							<td><input type="text" id="phone8" /></td>
+						</tr>
+						<tr>
+							<td>隊員</td>
+							<td><input type="text" id="id9" /></td>
+							<td><input type="text" id="name9" /></td>
+							<td><input type="text" id="major9" /></td>
+							<td><select id="grade9">
+								<option value=""></option>
+								<option value="B1">大一</option><option value="B2">大二</option>
+								<option value="B3">大三</option><option value="B4">大四</option>
+								<option value="B5">大五</option><option value="B6">大六</option>
+								<option value="B7">大七</option><option value="R1">碩一</option>
+								<option value="R2">碩二</option><option value="R3">碩三</option>
+								<option value="R4">碩四</option><option value="D1">博一</option>
+								<option value="D2">博二</option><option value="D3">博三</option>
+								<option value="D4">博四</option><option value="D5">博五</option>
+								<option value="D6">博六</option><option value="D7">博七</option>
+							</select></td>
+							<td><select id="sex9"><option value=""></option><option value="M">男</option><option value="F">女</option></td>
+							<td><input type="text" id="birth9" placeholder="1999-1-1" /></td>
+							<td><input type="text" id="identity9" /></td>
+							<td><input type="text" id="phone9" /></td>
+						</tr>
+						<tr>
+							<td>隊員</td>
+							<td><input type="text" id="id10" /></td>
+							<td><input type="text" id="name10" /></td>
+							<td><input type="text" id="major10" /></td>
+							<td><select id="grade10">
+								<option value=""></option>
+								<option value="B1">大一</option><option value="B2">大二</option>
+								<option value="B3">大三</option><option value="B4">大四</option>
+								<option value="B5">大五</option><option value="B6">大六</option>
+								<option value="B7">大七</option><option value="R1">碩一</option>
+								<option value="R2">碩二</option><option value="R3">碩三</option>
+								<option value="R4">碩四</option><option value="D1">博一</option>
+								<option value="D2">博二</option><option value="D3">博三</option>
+								<option value="D4">博四</option><option value="D5">博五</option>
+								<option value="D6">博六</option><option value="D7">博七</option>
+							</select></td>
+							<td><select id="sex10"><option value=""></option><option value="M">男</option><option value="F">女</option></td>
+							<td><input type="text" id="birth10" placeholder="1999-1-1" /></td>
+							<td><input type="text" id="identity10" /></td>
+							<td><input type="text" id="phone10" /></td>
+						</tr>
+						<tr>
+							<td>隊員</td>
+							<td><input type="text" id="id11" /></td>
+							<td><input type="text" id="name11" /></td>
+							<td><input type="text" id="major11" /></td>
+							<td><select id="grade11">
+								<option value=""></option>
+								<option value="B1">大一</option><option value="B2">大二</option>
+								<option value="B3">大三</option><option value="B4">大四</option>
+								<option value="B5">大五</option><option value="B6">大六</option>
+								<option value="B7">大七</option><option value="R1">碩一</option>
+								<option value="R2">碩二</option><option value="R3">碩三</option>
+								<option value="R4">碩四</option><option value="D1">博一</option>
+								<option value="D2">博二</option><option value="D3">博三</option>
+								<option value="D4">博四</option><option value="D5">博五</option>
+								<option value="D6">博六</option><option value="D7">博七</option>
+							</select></td>
+							<td><select id="sex11"><option value=""></option><option value="M">男</option><option value="F">女</option></td>
+							<td><input type="text" id="birth11" placeholder="1999-1-1" /></td>
+							<td><input type="text" id="identity11" /></td>
+							<td><input type="text" id="phone11" /></td>
+						</tr>
+						<tr>
+							<td>隊員</td>
+							<td><input type="text" id="id12" /></td>
+							<td><input type="text" id="name12" /></td>
+							<td><input type="text" id="major12" /></td>
+							<td><select id="grade12">
+								<option value=""></option>
+								<option value="B1">大一</option><option value="B2">大二</option>
+								<option value="B3">大三</option><option value="B4">大四</option>
+								<option value="B5">大五</option><option value="B6">大六</option>
+								<option value="B7">大七</option><option value="R1">碩一</option>
+								<option value="R2">碩二</option><option value="R3">碩三</option>
+								<option value="R4">碩四</option><option value="D1">博一</option>
+								<option value="D2">博二</option><option value="D3">博三</option>
+								<option value="D4">博四</option><option value="D5">博五</option>
+								<option value="D6">博六</option><option value="D7">博七</option>
+							</select></td>
+							<td><select id="sex12"><option value=""></option><option value="M">男</option><option value="F">女</option></td>
+							<td><input type="text" id="birth12" placeholder="1999-1-1" /></td>
+							<td><input type="text" id="identity12" /></td>
+							<td><input type="text" id="phone12" /></td>
+						</tr>
+					</table>
+					<p class="text-danger">***紅色邊框欄位為必填***</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-2">
+					<p><input type="checkbox" id="check" value="Y" /> 報名確認</p>
+					<button onclick="sign_up()">確定報名</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="footer">
+		<div class="container">
+			<div class="row center">
+				<span><a href="https://www.facebook.com/ntubadminton2012/?fref=ts" target="_blank"><img src="facebook.png" class="small_pic" /></a></span>
+				<span class="small">&copy; 2016 NTU Badminton All Rights Reserved</span>
+			</div>
+		</div>
+	</section>
+
+	<script type="text/javascript">
+		function sign_up() {
+			var request = new XMLHttpRequest();
+			request.open("POST", "service.php");
+			var data = "new=G&type=G" + 
+					   "&Gmajor=" + document.getElementById("Gmajor").value +
+					   "&Gname=" + document.getElementById("Gname").value +
+					   "&id1=" + document.getElementById("id1").value +
+					   "&id2=" + document.getElementById("id2").value +
+					   "&id3=" + document.getElementById("id3").value +
+					   "&id4=" + document.getElementById("id4").value +
+					   "&id5=" + document.getElementById("id5").value +
+					   "&id6=" + document.getElementById("id6").value +
+					   "&id7=" + document.getElementById("id7").value +
+					   "&id8=" + document.getElementById("id8").value +
+					   "&id9=" + document.getElementById("id9").value +
+					   "&id10=" + document.getElementById("id10").value +
+					   "&id11=" + document.getElementById("id11").value +
+					   "&id12=" + document.getElementById("id12").value +
+					   "&name1=" + document.getElementById("name1").value +
+					   "&name2=" + document.getElementById("name2").value +
+					   "&name3=" + document.getElementById("name3").value +
+					   "&name4=" + document.getElementById("name4").value +
+					   "&name5=" + document.getElementById("name5").value +
+					   "&name6=" + document.getElementById("name6").value +
+					   "&name7=" + document.getElementById("name7").value +
+					   "&name8=" + document.getElementById("name8").value +
+					   "&name9=" + document.getElementById("name9").value +
+					   "&name10=" + document.getElementById("name10").value +
+					   "&name11=" + document.getElementById("name11").value +
+					   "&name12=" + document.getElementById("name12").value +
+					   "&major1=" + document.getElementById("major1").value +
+					   "&major2=" + document.getElementById("major2").value +
+					   "&major3=" + document.getElementById("major3").value +
+					   "&major4=" + document.getElementById("major4").value +
+					   "&major5=" + document.getElementById("major5").value +
+					   "&major6=" + document.getElementById("major6").value +
+					   "&major7=" + document.getElementById("major7").value +
+					   "&major8=" + document.getElementById("major8").value +
+					   "&major9=" + document.getElementById("major9").value +
+					   "&major10=" + document.getElementById("major10").value +
+					   "&major11=" + document.getElementById("major11").value +
+					   "&major12=" + document.getElementById("major12").value +
+					   "&grade1=" + document.getElementById("grade1").value +
+					   "&grade2=" + document.getElementById("grade2").value +
+					   "&grade3=" + document.getElementById("grade3").value +
+					   "&grade4=" + document.getElementById("grade4").value +
+					   "&grade5=" + document.getElementById("grade5").value +
+					   "&grade6=" + document.getElementById("grade6").value +
+					   "&grade7=" + document.getElementById("grade7").value +
+					   "&grade8=" + document.getElementById("grade8").value +
+					   "&grade9=" + document.getElementById("grade9").value +
+					   "&grade10=" + document.getElementById("grade10").value +
+					   "&grade11=" + document.getElementById("grade11").value +
+					   "&grade12=" + document.getElementById("grade12").value +
+					   "&sex1=" + document.getElementById("sex1").value +
+					   "&sex2=" + document.getElementById("sex2").value +
+					   "&sex3=" + document.getElementById("sex3").value +
+					   "&sex4=" + document.getElementById("sex4").value +
+					   "&sex5=" + document.getElementById("sex5").value +
+					   "&sex6=" + document.getElementById("sex6").value +
+					   "&sex7=" + document.getElementById("sex7").value +
+					   "&sex8=" + document.getElementById("sex8").value +
+					   "&sex9=" + document.getElementById("sex9").value +
+					   "&sex10=" + document.getElementById("sex10").value +
+					   "&sex11=" + document.getElementById("sex11").value +
+					   "&sex12=" + document.getElementById("sex12").value +
+					   "&birth1=" + document.getElementById("birth1").value +
+					   "&birth2=" + document.getElementById("birth2").value +
+					   "&birth3=" + document.getElementById("birth3").value +
+					   "&birth4=" + document.getElementById("birth4").value +
+					   "&birth5=" + document.getElementById("birth5").value +
+					   "&birth6=" + document.getElementById("birth6").value +
+					   "&birth7=" + document.getElementById("birth7").value +
+					   "&birth8=" + document.getElementById("birth8").value +
+					   "&birth9=" + document.getElementById("birth9").value +
+					   "&birth10=" + document.getElementById("birth10").value +
+					   "&birth11=" + document.getElementById("birth11").value +
+					   "&birth12=" + document.getElementById("birth12").value +
+					   "&identity1=" + document.getElementById("identity1").value +
+					   "&identity2=" + document.getElementById("identity2").value +
+					   "&identity3=" + document.getElementById("identity3").value +
+					   "&identity4=" + document.getElementById("identity4").value +
+					   "&identity5=" + document.getElementById("identity5").value +
+					   "&identity6=" + document.getElementById("identity6").value +
+					   "&identity7=" + document.getElementById("identity7").value +
+					   "&identity8=" + document.getElementById("identity8").value +
+					   "&identity9=" + document.getElementById("identity9").value +
+					   "&identity10=" + document.getElementById("identity10").value +
+					   "&identity11=" + document.getElementById("identity11").value +
+					   "&identity12=" + document.getElementById("identity12").value +
+					   "&phone1=" + document.getElementById("phone1").value +
+					   "&phone2=" + document.getElementById("phone2").value +
+					   "&phone3=" + document.getElementById("phone3").value +
+					   "&phone4=" + document.getElementById("phone4").value +
+					   "&phone5=" + document.getElementById("phone5").value +
+					   "&phone6=" + document.getElementById("phone6").value +
+					   "&phone7=" + document.getElementById("phone7").value +
+					   "&phone8=" + document.getElementById("phone8").value +
+					   "&phone9=" + document.getElementById("phone9").value +
+					   "&phone10=" + document.getElementById("phone10").value +
+					   "&phone11=" + document.getElementById("phone11").value +
+					   "&phone12=" + document.getElementById("phone12").value;
+			var check = document.getElementById("check");
+			if (check.checked){
+				data = data + "&check=" + check.value;
+			}
+			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			request.send(data);
+
+			request.onreadystatechange = function() {
+				if (request.readyState === 4 && request.status === 200){  
+					var data = JSON.parse(request.responseText);
+					if (data.msg == 'ok'){
+						alert('報名成功，您的編號為 ' + data.num + '。請於指定時間內繳費');
+						location.replace("index.html");
+					}
+					else {
+						alert(data.msg);
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>
