@@ -11,12 +11,12 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != 'Y'){
 $db = mysql_connect('localhost', 'root', '');
 mysql_query("SET NAMES 'utf8'");
 mysql_select_db('NTUcup', $db);
-$payMS = $_POST['MS'];
-$payWS = $_POST['WS'];
-$payMD = $_POST['MD'];
-$payWD = $_POST['WD'];
-$payXD = $_POST['XD'];
-$payG = $_POST['G'];
+$payMS = safe($_POST['MS']);
+$payWS = safe($_POST['WS']);
+$payMD = safe($_POST['MD']);
+$payWD = safe($_POST['WD']);
+$payXD = safe($_POST['XD']);
+$payG = safe($_POST['G']);
 
 $countMS = count($payMS);
 for($i = 0; $i < $countMS; $i++){
@@ -47,6 +47,10 @@ $countG = count($payG);
 for($i = 0; $i < $countG; $i++){
 	$G = $payG[$i];
 	mysql_query("UPDATE G SET PAYSTAT=1 WHERE NUM=$G");
+}
+
+function safe($value) {
+	return htmlspecialchars(addslashes($value));
 }
 ?>
 

@@ -4,63 +4,67 @@ $db = mysql_connect('localhost', 'root', '');
 mysql_query("SET NAMES 'utf8'");
 mysql_select_db('NTUcup', $db);
 
-if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['account']) && isset($_POST['password'])){
+if ($_SERVER['REQUEST_METHOD'] == "POST" && isset(safe($_POST['account'])) && isset(safe($_POST['password']))){
     login();
 }
 
 else if ($_SERVER['REQUEST_METHOD'] == "GET"){
-    if (isset($_GET['id'])){
+    if (isset(safe($_GET['id']))){
         search1();
     }
-    else if (isset($_GET['type']) && isset($_GET['num'])){
+    else if (isset(safe($_GET['type'])) && isset(safe($_GET['num']))){
         search2();
     }
 }
 
-else if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['new'])){
-    if ($_POST['new'] == "MS"){
+else if ($_SERVER['REQUEST_METHOD'] == "POST" && isset(safe($_POST['new']))){
+    if (safe($_POST['new']) == "MS"){
         sign_up_1('MS');
     }
-    else if ($_POST['new'] == "WS"){
+    else if (safe($_POST['new']) == "WS"){
         sign_up_1('WS');
     }
-    else if ($_POST['new'] == "MD"){
+    else if (safe($_POST['new']) == "MD"){
         sign_up_2('MD');
     }
-    else if ($_POST['new'] == "WD"){
+    else if (safe($_POST['new']) == "WD"){
         sign_up_2('WD');
     }
-    else if ($_POST['new'] == "XD"){
+    else if (safe($_POST['new']) == "XD"){
         sign_up_2('XD');
     }
-    else if($_POST['new'] == "G"){
+    else if(safe($_POST['new']) == "G"){
         sign_up_3();
     }
 }
-else if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])){
-    $id = (string)$_POST['id'];
+else if ($_SERVER['REQUEST_METHOD'] == "POST" && isset(safe($_POST['id']))){
+    $id = (string)safe($_POST['id']);
     $id = strtoupper($id);
     send_back(check_id($id));
 }
-else if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['phone'])){
-    $phone = $_POST['phone'];
+else if ($_SERVER['REQUEST_METHOD'] == "POST" && isset(safe($_POST['phone']))){
+    $phone = safe($_POST['phone']);
     send_back(check_phone($phone));
 }
-else if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['birthy']) && isset($_POST['birthm']) && isset($_POST['birthd'])){
-    $birthy = (int)$_POST['birthy'];
-    $birthm = (int)$_POST['birthm'];
-    $birthd = (int)$_POST['birthd'];
+else if ($_SERVER['REQUEST_METHOD'] == "POST" && isset(safe($_POST['birthy'])) && isset(safe($_POST['birthm'])) && isset(safe($_POST['birthd']))){
+    $birthy = (int)safe($_POST['birthy']);
+    $birthm = (int)safe($_POST['birthm']);
+    $birthd = (int)safe($_POST['birthd']);
     send_back(check_birth($birthy, $birthm, $birthd));
 }
-else if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['identity'])){
-    $identity = (string)$_POST['identity'];
+else if ($_SERVER['REQUEST_METHOD'] == "POST" && isset(safe($_POST['identity']))){
+    $identity = (string)safe($_POST['identity']);
     $identity = strtoupper($identity);
     send_back(check_identity($identity));
 }
-else if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['identity_W'])){
-    $identity = (string)$_POST['identity_W'];
+else if ($_SERVER['REQUEST_METHOD'] == "POST" && isset(safe($_POST['identity_W']))){
+    $identity = (string)safe($_POST['identity_W']);
     $identity = strtoupper($identity);
     send_back(check_identity_W($identity));
+}
+
+function safe($value) {
+    return htmlspecialchars(addslashes($value));
 }
 
 function transfer_grade($grade) {
