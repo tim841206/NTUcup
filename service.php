@@ -97,7 +97,7 @@ function send_back($msg) {
 }
 
 function login() {
-    if ($_POST['account'] == 'NTUcup' && $_POST['password'] == '0986036999'){
+    if (safe($_POST['account']) == 'NTUcup' && safe($_POST['password']) == '0986036999'){
         session_start();
         $_SESSION['valid'] = 'Y';
         send_back('ok');
@@ -112,7 +112,7 @@ function search1() {
     $num_1 = null; $grade_1 = null; $name_1 = null; $paystat_1 = null;
     $num_2 = null; $grade_2 = null; $name_2 = null; $paystat_2 = null;
     $num_3 = null; $grade_3 = null; $name_3 = null; $paystat_3 = null;
-    $id = strtoupper($_GET['id']);
+    $id = strtoupper(safe($_GET['id']));
     $queryMS = "SELECT * FROM MS WHERE ID='$id'";
     $queryresult_MS = mysql_fetch_array(mysql_query($queryMS));
     $queryWS = "SELECT * FROM WS WHERE ID='$id'";
@@ -297,8 +297,8 @@ function search1() {
 }
 
 function search2() {
-    $type = $_GET['type'];
-    $num = $_GET['num'];
+    $type = safe($_GET['type']);
+    $num = safe($_GET['num']);
     if ($type == 'A'){
         $queryMS = "SELECT * FROM MS WHERE NUM='$num'";
         $queryresult_MS = mysql_fetch_array(mysql_query($queryMS));
@@ -421,7 +421,7 @@ function check_id($id) {
         $queryresult_XD_1 = mysql_fetch_row(mysql_query($queryID_XD_1));
         $queryID_XD_2 = "SELECT ID_2 FROM XD WHERE ID_2='$id'";
         $queryresult_XD_2 = mysql_fetch_row(mysql_query($queryID_XD_2));
-        $type = $_POST['type'];
+        $type = safe($_POST['type']);
         if ($type == 'MS'){
             if ($queryresult_MS){
                 return '您已經報名過此項目！';
@@ -697,7 +697,7 @@ function check_grade($grade) {
 }
 
 function check_check() {
-    if (isset($_POST['check']) && $_POST['check'] == 'Y'){
+    if (isset(safe($_POST['check'])) && safe($_POST['check']) == 'Y'){
         return 'ok';
     }
     else {
@@ -724,14 +724,14 @@ function check_Gname($Gname) {
 }
 
 function sign_up_1($new) {
-    $ID = strtoupper($_POST['id']);
-    $NAME = $_POST['name'];
-    $MAJOR = $_POST['major'];
-    $GRADE = $_POST['grade'];
-    $PHONE = $_POST['phone'];
-    $BIRTHY = $_POST['birthy'];
-    $BIRTHM = $_POST['birthm'];
-    $BIRTHD = $_POST['birthd'];
+    $ID = strtoupper(safe($_POST['id']));
+    $NAME = safe($_POST['name']);
+    $MAJOR = safe($_POST['major']);
+    $GRADE = safe($_POST['grade']);
+    $PHONE = safe($_POST['phone']);
+    $BIRTHY = safe($_POST['birthy']);
+    $BIRTHM = safe($_POST['birthm']);
+    $BIRTHD = safe($_POST['birthd']);
     if (check_id($ID) != 'ok') {send_back(check_id($ID)); return;}
     if (check_name($NAME) != 'ok') {send_back(check_name($NAME)); return;}
     if (check_major($MAJOR) != 'ok') {send_back(check_major($MAJOR)); return;}
@@ -743,7 +743,7 @@ function sign_up_1($new) {
     date_default_timezone_set('Asia/Taipei');
     $SIGN_TIME = date("Y-m-d H:i:s");
     if ($new == 'MS'){
-        $IDENTITY = strtoupper($_POST['identity']);
+        $IDENTITY = strtoupper(safe($_POST['identity']));
         if (check_identity($IDENTITY) != 'ok') {send_back(check_identity($IDENTITY)); return;}
         $queryMS_NUM = "SELECT MS_NUM FROM setup";
         $queryresult_MS_NUM = mysql_query($queryMS_NUM);
@@ -761,7 +761,7 @@ function sign_up_1($new) {
         }
     }
     else if ($new == 'WS'){
-        $IDENTITY = $_POST['identity_W'];
+        $IDENTITY = safe($_POST['identity_W']);
         if (check_identity_W($IDENTITY) != 'ok') {send_back(check_identity_W($IDENTITY)); return;}
         $queryWS_NUM = "SELECT WS_NUM FROM setup";
         $queryresult_WS_NUM = mysql_query($queryWS_NUM);
@@ -781,22 +781,22 @@ function sign_up_1($new) {
 }
 
 function sign_up_2($new) {
-    $ID1 = strtoupper($_POST['id1']);
-    $ID2 = strtoupper($_POST['id2']);
-    $NAME1 = $_POST['name1'];
-    $NAME2 = $_POST['name2'];
-    $MAJOR1 = $_POST['major1'];
-    $MAJOR2 = $_POST['major2'];
-    $GRADE1 = $_POST['grade1'];
-    $GRADE2 = $_POST['grade2'];
-    $PHONE1 = $_POST['phone1'];
-    $PHONE2 = $_POST['phone2'];
-    $BIRTHY1 = $_POST['birthy1'];
-    $BIRTHY2 = $_POST['birthy2'];
-    $BIRTHM1 = $_POST['birthm1'];
-    $BIRTHM2 = $_POST['birthm2'];
-    $BIRTHD1 = $_POST['birthd1'];
-    $BIRTHD2 = $_POST['birthd2'];
+    $ID1 = strtoupper(safe($_POST['id1']));
+    $ID2 = strtoupper(safe($_POST['id2']));
+    $NAME1 = safe($_POST['name1']);
+    $NAME2 = safe($_POST['name2']);
+    $MAJOR1 = safe($_POST['major1']);
+    $MAJOR2 = safe($_POST['major2']);
+    $GRADE1 = safe($_POST['grade1']);
+    $GRADE2 = safe($_POST['grade2']);
+    $PHONE1 = safe($_POST['phone1']);
+    $PHONE2 = safe($_POST['phone2']);
+    $BIRTHY1 = safe($_POST['birthy1']);
+    $BIRTHY2 = safe($_POST['birthy2']);
+    $BIRTHM1 = safe($_POST['birthm1']);
+    $BIRTHM2 = safe($_POST['birthm2']);
+    $BIRTHD1 = safe($_POST['birthd1']);
+    $BIRTHD2 = safe($_POST['birthd2']);
     if (check_id($ID1) != 'ok') {send_back(check_id($ID1)); return;}
     if (check_id($ID2) != 'ok') {send_back(check_id($ID2)); return;}
     if (check_name($NAME1) != 'ok') {send_back(check_name($NAME1)); return;}
@@ -815,8 +815,8 @@ function sign_up_2($new) {
     date_default_timezone_set('Asia/Taipei');
     $SIGN_TIME = date("Y-m-d H:i:s");
     if ($new == 'MD'){
-        $IDENTITY1 = strtoupper($_POST['identity1']);
-        $IDENTITY2 = strtoupper($_POST['identity2']);
+        $IDENTITY1 = strtoupper(safe($_POST['identity1']));
+        $IDENTITY2 = strtoupper(safe($_POST['identity2']));
         if (check_identity($IDENTITY1) != 'ok') {send_back(check_identity($IDENTITY1)); return;}
         if (check_identity($IDENTITY2) != 'ok') {send_back(check_identity($IDENTITY2)); return;}
         $queryMD_NUM = "SELECT MD_NUM FROM setup";
@@ -837,8 +837,8 @@ function sign_up_2($new) {
         }
     }
     else if ($new == 'WD'){
-        $IDENTITY1 = strtoupper($_POST['identity_W1']);
-        $IDENTITY2 = strtoupper($_POST['identity_W2']);
+        $IDENTITY1 = strtoupper(safe($_POST['identity_W1']));
+        $IDENTITY2 = strtoupper(safe($_POST['identity_W2']));
         if (check_identity_W($IDENTITY1) != 'ok') {send_back(check_identity_W($IDENTITY1)); return;}
         if (check_identity_W($IDENTITY2) != 'ok') {send_back(check_identity_W($IDENTITY2)); return;}
         $queryWD_NUM = "SELECT WD_NUM FROM setup";
@@ -859,8 +859,8 @@ function sign_up_2($new) {
         }
     }
     else if ($new == 'XD'){
-        $IDENTITY1 = strtoupper($_POST['identity1']);
-        $IDENTITY2 = strtoupper($_POST['identity_W2']);
+        $IDENTITY1 = strtoupper(safe($_POST['identity1']));
+        $IDENTITY2 = strtoupper(safe($_POST['identity_W2']));
         if (check_identity($IDENTITY1) != 'ok') {send_back(check_identity($IDENTITY1)); return;}
         if (check_identity_W($IDENTITY2) != 'ok') {send_back(check_identity_W($IDENTITY2)); return;}
         $queryXD_NUM = "SELECT XD_NUM FROM setup";
@@ -883,61 +883,61 @@ function sign_up_2($new) {
 }
 
 function sign_up_3() {
-    $Gmajor = $_POST['Gmajor']; $Gname = $_POST['Gname'];
-    $ID1 = strtoupper($_POST['id1']);    $ID2 = strtoupper($_POST['id2']);
-    $ID3 = strtoupper($_POST['id3']);    $ID4 = strtoupper($_POST['id4']);
-    $ID5 = strtoupper($_POST['id5']);    $ID6 = strtoupper($_POST['id6']);
-    $ID7 = strtoupper($_POST['id7']);    $ID8 = strtoupper($_POST['id8']);
-    $ID9 = strtoupper($_POST['id9']);    $ID10 = strtoupper($_POST['id10']);
-    $ID11 = strtoupper($_POST['id11']);  $ID12 = strtoupper($_POST['id12']);
-    $NAME1 = $_POST['name1'];   $NAME2 = $_POST['name2'];
-    $NAME3 = $_POST['name3'];   $NAME4 = $_POST['name4'];
-    $NAME5 = $_POST['name5'];   $NAME6 = $_POST['name6'];
-    $NAME7 = $_POST['name7'];   $NAME8 = $_POST['name8'];
-    $NAME9 = $_POST['name9'];   $NAME10 = $_POST['name10'];
-    $NAME11 = $_POST['name11']; $NAME12 = $_POST['name12'];
-    $MAJOR1 = $_POST['major1'];     $MAJOR2 = $_POST['major2'];
-    $MAJOR3 = $_POST['major3'];     $MAJOR4 = $_POST['major4'];
-    $MAJOR5 = $_POST['major5'];     $MAJOR6 = $_POST['major6'];
-    $MAJOR7 = $_POST['major7'];     $MAJOR8 = $_POST['major8'];
-    $MAJOR9 = $_POST['major9'];     $MAJOR10 = $_POST['major10'];
-    $MAJOR11 = $_POST['major11'];   $MAJOR12 = $_POST['major12'];
-    $GRADE1 = $_POST['grade1'];     $GRADE2 = $_POST['grade2'];
-    $GRADE3 = $_POST['grade3'];     $GRADE4 = $_POST['grade4'];
-    $GRADE5 = $_POST['grade5'];     $GRADE6 = $_POST['grade6'];
-    $GRADE7 = $_POST['grade7'];     $GRADE8 = $_POST['grade8'];
-    $GRADE9 = $_POST['grade9'];     $GRADE10 = $_POST['grade10'];
-    $GRADE11 = $_POST['grade11'];   $GRADE12 = $_POST['grade12'];
-    $SEX1 = $_POST['sex1'];     $SEX2 = $_POST['sex2'];
-    $SEX3 = $_POST['sex3'];     $SEX4 = $_POST['sex4'];
-    $SEX5 = $_POST['sex5'];     $SEX6 = $_POST['sex6'];
-    $SEX7 = $_POST['sex7'];     $SEX8 = $_POST['sex8'];
-    $SEX9 = $_POST['sex9'];     $SEX10 = $_POST['sex10'];
+    $Gmajor = safe($_POST['Gmajor']); $Gname = safe($_POST['Gname']);
+    $ID1 = strtoupper(safe($_POST['id1']));    $ID2 = strtoupper(safe($_POST['id2']));
+    $ID3 = strtoupper(safe($_POST['id3']));    $ID4 = strtoupper(safe($_POST['id4']));
+    $ID5 = strtoupper(safe($_POST['id5']));    $ID6 = strtoupper(safe($_POST['id6']));
+    $ID7 = strtoupper(safe($_POST['id7']));    $ID8 = strtoupper(safe($_POST['id8']));
+    $ID9 = strtoupper(safe($_POST['id9']));    $ID10 = strtoupper(safe($_POST['id10']));
+    $ID11 = strtoupper(safe($_POST['id11']));  $ID12 = strtoupper(safe($_POST['id12']));
+    $NAME1 = safe($_POST['name1']);   $NAME2 = safe($_POST['name2']);
+    $NAME3 = safe($_POST['name3']);   $NAME4 = safe($_POST['name4']);
+    $NAME5 = safe($_POST['name5']);   $NAME6 = safe($_POST['name6']);
+    $NAME7 = safe($_POST['name7']);   $NAME8 = safe($_POST['name8']);
+    $NAME9 = safe($_POST['name9']);   $NAME10 = safe($_POST['name10']);
+    $NAME11 = safe($_POST['name11']); $NAME12 = safe($_POST['name12']);
+    $MAJOR1 = safe($_POST['major1']);     $MAJOR2 = safe($_POST['major2']);
+    $MAJOR3 = safe($_POST['major3']);     $MAJOR4 = safe($_POST['major4']);
+    $MAJOR5 = safe($_POST['major5']);     $MAJOR6 = safe($_POST['major6']);
+    $MAJOR7 = safe($_POST['major7']);     $MAJOR8 = safe($_POST['major8']);
+    $MAJOR9 = safe($_POST['major9']);     $MAJOR10 = safe($_POST['major10']);
+    $MAJOR11 = safe($_POST['major11']);   $MAJOR12 = safe($_POST['major12']);
+    $GRADE1 = safe($_POST['grade1']);     $GRADE2 = safe($_POST['grade2']);
+    $GRADE3 = safe($_POST['grade3']);     $GRADE4 = safe($_POST['grade4']);
+    $GRADE5 = safe($_POST['grade5']);     $GRADE6 = safe($_POST['grade6']);
+    $GRADE7 = safe($_POST['grade7']);     $GRADE8 = safe($_POST['grade8']);
+    $GRADE9 = safe($_POST['grade9']);     $GRADE10 = safe($_POST['grade10']);
+    $GRADE11 = safe($_POST['grade11']);   $GRADE12 = safe($_POST['grade12']);
+    $SEX1 = safe($_POST['sex1']);     $SEX2 = safe($_POST['sex2']);
+    $SEX3 = safe($_POST['sex3']);     $SEX4 = safe($_POST['sex4']);
+    $SEX5 = safe($_POST['sex5']);     $SEX6 = safe($_POST['sex6']);
+    $SEX7 = safe($_POST['sex7']);     $SEX8 = safe($_POST['sex8']);
+    $SEX9 = safe($_POST['sex9']);     $SEX10 = $_POST['sex10'];
     $SEX11 = $_POST['sex11'];   $SEX12 = $_POST['sex12'];
-    $BIRTH1 = $_POST['birth1'];     $BIRTH2 = $_POST['birth2'];
-    $BIRTH3 = $_POST['birth3'];     $BIRTH4 = $_POST['birth4'];
-    $BIRTH5 = $_POST['birth5'];     $BIRTH6 = $_POST['birth6'];
-    $BIRTH7 = $_POST['birth7'];     $BIRTH8 = $_POST['birth8'];
-    $BIRTH9 = $_POST['birth9'];     $BIRTH10 = $_POST['birth10'];
-    $BIRTH11 = $_POST['birth11'];   $BIRTH12 = $_POST['birth12'];
-    $PHONE1 = $_POST['phone1'];     $PHONE2 = $_POST['phone2'];
-    $PHONE3 = $_POST['phone3'];     $PHONE4 = $_POST['phone4'];
-    $PHONE5 = $_POST['phone5'];     $PHONE6 = $_POST['phone6'];
-    $PHONE7 = $_POST['phone7'];     $PHONE8 = $_POST['phone8'];
-    $PHONE9 = $_POST['phone9'];     $PHONE10 = $_POST['phone10'];
-    $PHONE11 = $_POST['phone11'];   $PHONE12 = $_POST['phone12'];
-    $IDENTITY1 = strtoupper($_POST['identity1']);
-    $IDENTITY2 = strtoupper($_POST['identity2']);
-    $IDENTITY3 = strtoupper($_POST['identity3']);
-    $IDENTITY4 = strtoupper($_POST['identity4']);
-    $IDENTITY5 = strtoupper($_POST['identity5']);
-    $IDENTITY6 = strtoupper($_POST['identity6']);
-    $IDENTITY7 = strtoupper($_POST['identity7']);
-    $IDENTITY8 = strtoupper($_POST['identity8']);
-    $IDENTITY9 = strtoupper($_POST['identity9']);
-    $IDENTITY10 = strtoupper($_POST['identity10']);
-    $IDENTITY11 = strtoupper($_POST['identity11']);
-    $IDENTITY12 = strtoupper($_POST['identity12']);
+    $BIRTH1 = safe($_POST['birth1']);     $BIRTH2 = safe($_POST['birth2']);
+    $BIRTH3 = safe($_POST['birth3']);     $BIRTH4 = safe($_POST['birth4']);
+    $BIRTH5 = safe($_POST['birth5']);     $BIRTH6 = safe($_POST['birth6']);
+    $BIRTH7 = safe($_POST['birth7']);     $BIRTH8 = safe($_POST['birth8']);
+    $BIRTH9 = safe($_POST['birth9']);     $BIRTH10 = safe($_POST['birth10']);
+    $BIRTH11 = safe($_POST['birth11']);   $BIRTH12 = safe($_POST['birth12']);
+    $PHONE1 = safe($_POST['phone1']);     $PHONE2 = safe($_POST['phone2']);
+    $PHONE3 = safe($_POST['phone3']);     $PHONE4 = safe($_POST['phone4']);
+    $PHONE5 = safe($_POST['phone5']);     $PHONE6 = safe($_POST['phone6']);
+    $PHONE7 = safe($_POST['phone7']);     $PHONE8 = safe($_POST['phone8']);
+    $PHONE9 = safe($_POST['phone9']);     $PHONE10 = safe($_POST['phone10']);
+    $PHONE11 = safe($_POST['phone11']);   $PHONE12 = safe($_POST['phone12']);
+    $IDENTITY1 = strtoupper(safe($_POST['identity1']));
+    $IDENTITY2 = strtoupper(safe($_POST['identity2']));
+    $IDENTITY3 = strtoupper(safe($_POST['identity3']));
+    $IDENTITY4 = strtoupper(safe($_POST['identity4']));
+    $IDENTITY5 = strtoupper(safe($_POST['identity5']));
+    $IDENTITY6 = strtoupper(safe($_POST['identity6']));
+    $IDENTITY7 = strtoupper(safe($_POST['identity7']));
+    $IDENTITY8 = strtoupper(safe($_POST['identity8']));
+    $IDENTITY9 = strtoupper(safe($_POST['identity9']));
+    $IDENTITY10 = strtoupper(safe($_POST['identity10']));
+    $IDENTITY11 = strtoupper(safe($_POST['identity11']));
+    $IDENTITY12 = strtoupper(safe($_POST['identity12']));
     if (check_Gmajor($Gmajor) != 'ok') {send_back(check_Gmajor($Gmajor)); return;}
     if (check_Gname($Gname) != 'ok') {send_back(check_Gname($Gname)); return;}
     if (check_id_G($ID1) != 'ok') {send_back(check_id_G($ID1)); return;}
