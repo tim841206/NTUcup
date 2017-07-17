@@ -1,4 +1,4 @@
-<?
+<?php
 function transfer_grade($grade) {
     if ($grade == 'B1') {return '大一';}
     else if ($grade == 'B2') {return '大二';}
@@ -10,6 +10,7 @@ function transfer_grade($grade) {
     else if ($grade == 'R1') {return '碩一';}
     else if ($grade == 'R2') {return '碩二';}
     else if ($grade == 'R3') {return '碩三';}
+    else if ($grade == 'R4') {return '碩四';}
     else if ($grade == 'D1') {return '博一';}
     else if ($grade == 'D2') {return '博二';}
     else if ($grade == 'D3') {return '博三';}
@@ -17,6 +18,10 @@ function transfer_grade($grade) {
     else if ($grade == 'D5') {return '博五';}
     else if ($grade == 'D6') {return '博六';}
     else if ($grade == 'D7') {return '博七';}
+}
+function transfer_paystat($paystat) {
+    if ($paystat == 0) {return '未繳費';}
+    elseif ($paystat == 1) {return '已繳費';}
 }
 $db = mysql_connect('localhost', 'root', '');
 mysql_query("SET NAMES 'utf8'");
@@ -57,12 +62,12 @@ $numG = mysql_num_rows($queryG);
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-5 col-sm-offset-1 center">
+            <div class="col-sm-6 col-sm-offset-1 center">
                 <h3>查看報名名單</h3><br>
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h4 class="panel-title">男單 組數：<? echo $numMS;?></h4></a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h4 class="panel-title">男單 組數：<?php echo $numMS;?></h4></a>
                         </div>
                         <div id="collapse1" class="panel-collapse collapse">
                             <div class="panel-body">
@@ -71,16 +76,18 @@ $numG = mysql_num_rows($queryG);
                                         <th>編號</th>
                                         <th>系級</th>
                                         <th>姓名</th>
+                                        <th>繳費狀態</th>
                                     </tr>
-                                    <?
+                                    <?php
                                     while ($result = mysql_fetch_array($queryMS)){
                                         ?>
                                         <tr>
-                                            <td><? echo $result['NUM'];?></td>
-                                            <td><? echo $result['MAJOR'].transfer_grade($result['GRADE']);?></td>
-                                            <td><? echo $result['NAME'];?></td>
+                                            <td><?php echo $result['NUM'];?></td>
+                                            <td><?php echo $result['MAJOR'].transfer_grade($result['GRADE']);?></td>
+                                            <td><?php echo $result['NAME'];?></td>
+                                            <td><?php echo transfer_paystat($result['PAYSTAT']);?></td>
                                         </tr>
-                                        <?
+                                        <?php
                                     }
                                     ?>
                                 </table>
@@ -89,7 +96,7 @@ $numG = mysql_num_rows($queryG);
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h4 class="panel-title">女單 組數：<? echo $numWS;?></h4></a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h4 class="panel-title">女單 組數：<?php echo $numWS;?></h4></a>
                         </div>
                         <div id="collapse2" class="panel-collapse collapse">
                             <div class="panel-body">
@@ -98,16 +105,18 @@ $numG = mysql_num_rows($queryG);
                                         <th>編號</th>
                                         <th>系級</th>
                                         <th>姓名</th>
+                                        <th>繳費狀態</th>
                                     </tr>
-                                    <?
+                                    <?php
                                     while ($result = mysql_fetch_array($queryWS)){
                                         ?>
                                         <tr>
-                                            <td><? echo $result['NUM'];?></td>
-                                            <td><? echo $result['MAJOR'].transfer_grade($result['GRADE']);?></td>
-                                            <td><? echo $result['NAME'];?></td>
+                                            <td><?php echo $result['NUM'];?></td>
+                                            <td><?php echo $result['MAJOR'].transfer_grade($result['GRADE']);?></td>
+                                            <td><?php echo $result['NAME'];?></td>
+                                            <td><?php echo transfer_paystat($result['PAYSTAT']);?></td>
                                         </tr>
-                                        <?
+                                        <?php
                                     }
                                     ?>
                                 </table>
@@ -116,7 +125,7 @@ $numG = mysql_num_rows($queryG);
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><h4 class="panel-title">男雙 組數：<? echo $numMD;?></h4></a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><h4 class="panel-title">男雙 組數：<?php echo $numMD;?></h4></a>
                         </div>
                         <div id="collapse3" class="panel-collapse collapse">
                             <div class="panel-body">
@@ -127,18 +136,20 @@ $numG = mysql_num_rows($queryG);
                                         <th>姓名</th>
                                         <th>系級</th>
                                         <th>姓名</th>
+                                        <th>繳費狀態</th>
                                     </tr>
-                                    <?
+                                    <?php
                                     while ($result = mysql_fetch_array($queryMD)){
                                         ?>
                                         <tr>
-                                            <td><? echo $result['NUM'];?></td>
-                                            <td><? echo $result['MAJOR_1'].transfer_grade($result['GRADE_1']);?></td>
-                                            <td><? echo $result['NAME_1'];?></td>
-                                            <td><? echo $result['MAJOR_2'].transfer_grade($result['GRADE_2']);?></td>
-                                            <td><? echo $result['NAME_2'];?></td>
+                                            <td><?php echo $result['NUM'];?></td>
+                                            <td><?php echo $result['MAJOR_1'].transfer_grade($result['GRADE_1']);?></td>
+                                            <td><?php echo $result['NAME_1'];?></td>
+                                            <td><?php echo $result['MAJOR_2'].transfer_grade($result['GRADE_2']);?></td>
+                                            <td><?php echo $result['NAME_2'];?></td>
+                                            <td><?php echo transfer_paystat($result['PAYSTAT']);?></td>
                                         </tr>
-                                        <?
+                                        <?php
                                     }
                                     ?>
                                 </table>
@@ -147,7 +158,7 @@ $numG = mysql_num_rows($queryG);
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><h4 class="panel-title">女雙 組數：<? echo $numWD;?></h4></a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><h4 class="panel-title">女雙 組數：<?php echo $numWD;?></h4></a>
                         </div>
                         <div id="collapse4" class="panel-collapse collapse">
                             <div class="panel-body">
@@ -158,18 +169,20 @@ $numG = mysql_num_rows($queryG);
                                         <th>姓名</th>
                                         <th>系級</th>
                                         <th>姓名</th>
+                                        <th>繳費狀態</th>
                                     </tr>
-                                    <?
+                                    <?php
                                     while ($result = mysql_fetch_array($queryWD)){
                                         ?>
                                         <tr>
-                                            <td><? echo $result['NUM'];?></td>
-                                            <td><? echo $result['MAJOR_1'].transfer_grade($result['GRADE_1']);?></td>
-                                            <td><? echo $result['NAME_1'];?></td>
-                                            <td><? echo $result['MAJOR_2'].transfer_grade($result['GRADE_2']);?></td>
-                                            <td><? echo $result['NAME_2'];?></td>
+                                            <td><?php echo $result['NUM'];?></td>
+                                            <td><?php echo $result['MAJOR_1'].transfer_grade($result['GRADE_1']);?></td>
+                                            <td><?php echo $result['NAME_1'];?></td>
+                                            <td><?php echo $result['MAJOR_2'].transfer_grade($result['GRADE_2']);?></td>
+                                            <td><?php echo $result['NAME_2'];?></td>
+                                            <td><?php echo transfer_paystat($result['PAYSTAT']);?></td>
                                         </tr>
-                                        <?
+                                        <?php
                                     }
                                     ?>
                                 </table>
@@ -178,7 +191,7 @@ $numG = mysql_num_rows($queryG);
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5"><h4 class="panel-title">混雙 組數：<? echo $numXD;?></h4></a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5"><h4 class="panel-title">混雙 組數：<?php echo $numXD;?></h4></a>
                         </div>
                         <div id="collapse5" class="panel-collapse collapse">
                             <div class="panel-body">
@@ -189,18 +202,20 @@ $numG = mysql_num_rows($queryG);
                                         <th>姓名</th>
                                         <th>系級</th>
                                         <th>姓名</th>
+                                        <th>繳費狀態</th>
                                     </tr>
-                                    <?
+                                    <?php
                                     while ($result = mysql_fetch_array($queryXD)){
                                         ?>
                                         <tr>
-                                            <td><? echo $result['NUM'];?></td>
-                                            <td><? echo $result['MAJOR_1'].transfer_grade($result['GRADE_1']);?></td>
-                                            <td><? echo $result['NAME_1'];?></td>
-                                            <td><? echo $result['MAJOR_2'].transfer_grade($result['GRADE_2']);?></td>
-                                            <td><? echo $result['NAME_2'];?></td>
+                                            <td><?php echo $result['NUM'];?></td>
+                                            <td><?php echo $result['MAJOR_1'].transfer_grade($result['GRADE_1']);?></td>
+                                            <td><?php echo $result['NAME_1'];?></td>
+                                            <td><?php echo $result['MAJOR_2'].transfer_grade($result['GRADE_2']);?></td>
+                                            <td><?php echo $result['NAME_2'];?></td>
+                                            <td><?php echo transfer_paystat($result['PAYSTAT']);?></td>
                                         </tr>
-                                        <?
+                                        <?php
                                     }
                                     ?>
                                 </table>
@@ -209,7 +224,7 @@ $numG = mysql_num_rows($queryG);
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><h4 class="panel-title">團體 組數：<? echo $numG;?></h4></a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><h4 class="panel-title">團體 組數：<?php echo $numG;?></h4></a>
                         </div>
                         <div id="collapse6" class="panel-collapse collapse">
                             <div class="panel-body">
@@ -218,16 +233,18 @@ $numG = mysql_num_rows($queryG);
                                         <th>編號</th>
                                         <th>系所</th>
                                         <th>隊名</th>
+                                        <th>繳費狀態</th>
                                     </tr>
-                                    <?
+                                    <?php
                                     while ($result = mysql_fetch_array($queryG)){
                                         ?>
                                         <tr>
-                                            <td><? echo $result['NUM'];?></td>
-                                            <td><? echo $result['Gmajor'];?></td>
-                                            <td><? echo $result['Gname'];?></td>
+                                            <td><?php echo $result['NUM'];?></td>
+                                            <td><?php echo $result['Gmajor'];?></td>
+                                            <td><?php echo $result['Gname'];?></td>
+                                            <td><?php echo transfer_paystat($result['PAYSTAT']);?></td>
                                         </tr>
-                                        <?
+                                        <?php
                                     }
                                     ?>
                                 </table>
@@ -236,7 +253,7 @@ $numG = mysql_num_rows($queryG);
                     </div>
                 </div>
             </div>
-            <div class="col-sm-5 center">
+            <div class="col-sm-4 center">
                 <h3>查看繳費狀態</h3><br>
                 <h4>請輸入學生證號碼或項目及編號</h4>
                 <p>學生證號碼：<input type="text" id="id" /> <button onclick="search1()">查詢</button></p>
@@ -247,29 +264,29 @@ $numG = mysql_num_rows($queryG);
                         <option value="D">女雙</option>
                         <option value="E">混雙</option>
                         <option value="F">團體</option></select>
-                編號：<input type="text" id="num" /> <button onclick="search2()">查詢</button></p>
+                編號：<input type="text" id="num" style="width: 117px;"/> <button onclick="search2()">查詢</button></p>
                 <h4>查詢結果</h4>
                 <div class="row">
                     <div class="col-sm-3 center">
-                        <h4>項目及編號</h4>
+                        <h5>項目編號</h5>
                         <p id="num_1"></p>
                         <p id="num_2"></p>
                         <p id="num_3"></p>
                     </div>
                     <div class="col-sm-3 center">
-                        <h4>系級</h4>
+                        <h5>系級</h5>
                         <p id="grade_1"></p>
                         <p id="grade_2"></p>
                         <p id="grade_3"></p>
                     </div>
                     <div class="col-sm-3 center">
-                        <h4>姓名</h4>
+                        <h5>姓名</h5>
                         <p id="name_1"></p>
                         <p id="name_2"></p>
                         <p id="name_3"></p>
                     </div>
                     <div class="col-sm-3 center">
-                        <h4>繳費狀態</h4>
+                        <h5>繳費狀態</h5>
                         <p id="paystat_1"></p>
                         <p id="paystat_2"></p>
                         <p id="paystat_3"></p>
@@ -285,7 +302,7 @@ $numG = mysql_num_rows($queryG);
         <div class="container">
             <div class="row center">
                 <span><a href="https://www.facebook.com/ntubadminton2012/?fref=ts" target="_blank"><img src="facebook.png" class="small_pic" /></a></span>
-                <span class="small">&copy; 2016 NTU Badminton All Rights Reserved</span>
+                <span class="small">&copy; 2017 NTU Badminton All Rights Reserved</span>
             </div>
         </div>
     </section>

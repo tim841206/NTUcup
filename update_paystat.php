@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 if (!isset($_SESSION['valid']) || $_SESSION['valid'] != 'Y'){
     ?>
@@ -6,7 +6,7 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != 'Y'){
         alert('您無權限觀看此頁面');
         location.replace("index.html");
     </script>
-    <?
+    <?php
 }
 function transfer_grade($grade) {
     if ($grade == 'B1') {return '大一';}
@@ -19,6 +19,7 @@ function transfer_grade($grade) {
     else if ($grade == 'R1') {return '碩一';}
     else if ($grade == 'R2') {return '碩二';}
     else if ($grade == 'R3') {return '碩三';}
+    else if ($grade == 'R4') {return '碩四';}
     else if ($grade == 'D1') {return '博一';}
     else if ($grade == 'D2') {return '博二';}
     else if ($grade == 'D3') {return '博三';}
@@ -88,7 +89,7 @@ $numG = mysql_num_rows($queryG);
                                         <th>姓名</th>
                                         <th>繳費</th>
                                     </tr>
-                                    <?
+                                    <?php
                                     while ($result = mysql_fetch_array($queryMS)){
                                         echo '<tr><td>'.$result['NUM'].'</td><td>'.$result['MAJOR'].transfer_grade($result['GRADE']).'</td><td>'.$result['NAME'].'</td><td><input type="checkbox" name="MS[]" value="'.$result['NUM'].'"'.check_paystat($result['PAYSTAT']).' /></td></tr>';
                                     }
@@ -110,7 +111,7 @@ $numG = mysql_num_rows($queryG);
                                         <th>姓名</th>
                                         <th>繳費</th>
                                     </tr>
-                                    <?
+                                    <?php
                                     $count = 0;
                                     while ($result = mysql_fetch_array($queryWS)){
                                         $count += 1;
@@ -136,7 +137,7 @@ $numG = mysql_num_rows($queryG);
                                         <th>姓名</th>
                                         <th>繳費</th>
                                     </tr>
-                                    <?
+                                    <?php
                                     $count = 0;
                                     while ($result = mysql_fetch_array($queryMD)){
                                         $count += 1;
@@ -162,7 +163,7 @@ $numG = mysql_num_rows($queryG);
                                         <th>姓名</th>
                                         <th>繳費</th>
                                     </tr>
-                                    <?
+                                    <?php
                                     $count = 0;
                                     while ($result = mysql_fetch_array($queryWD)){
                                         $count += 1;
@@ -188,7 +189,7 @@ $numG = mysql_num_rows($queryG);
                                         <th>姓名</th>
                                         <th>繳費</th>
                                     </tr>
-                                    <?
+                                    <?php
                                     $count = 0;
                                     while ($result = mysql_fetch_array($queryXD)){
                                         $count += 1;
@@ -212,7 +213,7 @@ $numG = mysql_num_rows($queryG);
                                         <th>隊名</th>
                                         <th>繳費</th>
                                     </tr>
-                                    <?
+                                    <?php
                                     while ($result = mysql_fetch_array($queryG)){
                                         echo '<tr><td>'.$result['NUM'].'</td><td>'.$result['Gmajor'].'</td><td>'.$result['Gname'].'</td><td><input type="checkbox" name="G[]" value="'.$result['NUM'].'"'.check_paystat($result['PAYSTAT']).' /></td></tr>';
                                     }

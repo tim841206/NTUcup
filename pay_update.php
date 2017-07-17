@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 if (!isset($_SESSION['valid']) || $_SESSION['valid'] != 'Y'){
     ?>
@@ -6,17 +6,17 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != 'Y'){
         alert('您無權限觀看此頁面');
         location.replace("index.html");
     </script>
-    <?
+    <?php
 }
 $db = mysql_connect('localhost', 'root', '');
 mysql_query("SET NAMES 'utf8'");
 mysql_select_db('NTUcup', $db);
-$payMS = safe($_POST['MS']);
-$payWS = safe($_POST['WS']);
-$payMD = safe($_POST['MD']);
-$payWD = safe($_POST['WD']);
-$payXD = safe($_POST['XD']);
-$payG = safe($_POST['G']);
+$payMS = $_POST['MS'];
+$payWS = $_POST['WS'];
+$payMD = $_POST['MD'];
+$payWD = $_POST['WD'];
+$payXD = $_POST['XD'];
+$payG = $_POST['G'];
 
 $countMS = count($payMS);
 for($i = 0; $i < $countMS; $i++){

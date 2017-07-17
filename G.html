@@ -230,7 +230,7 @@
 						</tr>
 						<tr>
 							<td>隊員</td>
-							<td><input type="text" id="id9" /></td>
+							<td><input type="text" id="id9" onchange="placeholder9()" /></td>
 							<td><input type="text" id="name9" /></td>
 							<td><input type="text" id="major9" /></td>
 							<td><select id="grade9">
@@ -252,7 +252,7 @@
 						</tr>
 						<tr>
 							<td>隊員</td>
-							<td><input type="text" id="id10" /></td>
+							<td><input type="text" id="id10" onchange="placeholder10()" /></td>
 							<td><input type="text" id="name10" /></td>
 							<td><input type="text" id="major10" /></td>
 							<td><select id="grade10">
@@ -274,7 +274,7 @@
 						</tr>
 						<tr>
 							<td>隊員</td>
-							<td><input type="text" id="id11" /></td>
+							<td><input type="text" id="id11" onchange="placeholder11()" /></td>
 							<td><input type="text" id="name11" /></td>
 							<td><input type="text" id="major11" /></td>
 							<td><select id="grade11">
@@ -296,7 +296,7 @@
 						</tr>
 						<tr>
 							<td>隊員</td>
-							<td><input type="text" id="id12" /></td>
+							<td><input type="text" id="id12" onchange="placeholder12()" /></td>
 							<td><input type="text" id="name12" /></td>
 							<td><input type="text" id="major12" /></td>
 							<td><select id="grade12">
@@ -458,6 +458,66 @@
 						alert(data.msg);
 					}
 				}
+			}
+		}
+
+		function placeholder9() {
+			if (document.getElementById("id9").value == '') {
+				document.getElementById("name9").placeholder = '';
+				document.getElementById("major9").placeholder = '';
+				document.getElementById("birth9").placeholder = '';
+				document.getElementById("identity9").placeholder = '';
+			}
+			else {
+				document.getElementById("name9").placeholder = "必填";
+				document.getElementById("major9").placeholder = "必填";
+				document.getElementById("birth9").placeholder = "必填";
+				document.getElementById("identity9").placeholder = "必填";
+			}
+		}
+
+		function placeholder10() {
+			if (document.getElementById("id10").value == '') {
+				document.getElementById("name10").placeholder = '';
+				document.getElementById("major10").placeholder = '';
+				document.getElementById("birth10").placeholder = '';
+				document.getElementById("identity10").placeholder = '';
+			}
+			else {
+				document.getElementById("name10").placeholder = "必填";
+				document.getElementById("major10").placeholder = "必填";
+				document.getElementById("birth10").placeholder = "必填";
+				document.getElementById("identity10").placeholder = "必填";
+			}
+		}
+
+		function placeholder11() {
+			if (document.getElementById("id11").value == '') {
+				document.getElementById("name11").placeholder = '';
+				document.getElementById("major11").placeholder = '';
+				document.getElementById("birth11").placeholder = '';
+				document.getElementById("identity11").placeholder = '';
+			}
+			else {
+				document.getElementById("name11").placeholder = "必填";
+				document.getElementById("major11").placeholder = "必填";
+				document.getElementById("birth11").placeholder = "必填";
+				document.getElementById("identity11").placeholder = "必填";
+			}
+		}
+
+		function placeholder12() {
+			if (document.getElementById("id12").value == '') {
+				document.getElementById("name12").placeholder = '';
+				document.getElementById("major12").placeholder = '';
+				document.getElementById("birth12").placeholder = '';
+				document.getElementById("identity12").placeholder = '';
+			}
+			else {
+				document.getElementById("name12").placeholder = "必填";
+				document.getElementById("major12").placeholder = "必填";
+				document.getElementById("birth12").placeholder = "必填";
+				document.getElementById("identity12").placeholder = "必填";
 			}
 		}
 	</script>
