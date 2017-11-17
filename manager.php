@@ -46,6 +46,13 @@
 			<p>比賽結束之後在這裡清除報名資料，將會清除所有參賽者的報名資料並初始化資料庫。</p>
 		</div>
 	</div>
+	<br><br><br>
+	<div class="row">
+		<div class="col-sm-2 col-sm-offset-2">
+			<a onclick="enter_tournament()"><h4>進入賽程系統</h4></a><br>
+			<p>確認比賽名單之後進入這裡進行後續賽程規劃，將會產生賽程並輸出主審單。</p>
+		</div>
+	</div>
 	<script>
 		function check_clear() {
 			if (confirm("確定要清空報名資料?") == true){
@@ -55,6 +62,24 @@
 		function check_check() {
 			if (confirm("確定要確認比賽名單?") == true){
 				location.replace("check.php");
+			}
+		}
+		function enter_tournament() {
+			var request = new XMLHttpRequest();
+			request.open("POST", "tournament/index.php");
+			var data = "event=login&account=NTUcup&password=0986036999";
+			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			request.send(data);
+			request.onreadystatechange = function() {
+				if (request.readyState === 4 && request.status === 200) {
+					var data = JSON.parse(request.responseText);
+					if (data.message == 'Success') {
+						location.assign("tournament/index.php");
+					}
+					else {
+						alert(data.message);
+					}
+				}
 			}
 		}
 	</script>

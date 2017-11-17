@@ -11,7 +11,7 @@ if (!isset($_SESSION['valid']) || $_SESSION['valid'] != 'Y'){
 else {
 	$db = mysql_connect('localhost', 'root', '');
 	mysql_query("SET NAMES 'utf8'");
-	mysql_select_db('NTUcup', $db);
+	mysql_select_db('NEWcup', $db);
 	$deleteMS = "DELETE FROM MS WHERE PAYSTAT=0";
 	mysql_query($deleteMS);
 	$deleteWS = "DELETE FROM WS WHERE PAYSTAT=0";
