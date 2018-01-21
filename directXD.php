@@ -1,3 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION['valid']) || $_SESSION['valid'] != 'Y'){
+    ?>
+    <script>
+        alert('您無權限觀看此頁面');
+        location.replace("index.html");
+    </script>
+    <?php
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +25,7 @@
 <body>
 	<header>
 		<div class="container">
-			<h1 class="center">2018台大盃羽球賽報名表-男雙</h1>
+			<h1 class="center">2018台大盃羽球賽報名表-混雙</h1>
 		</div>
 	</header>
 
@@ -22,12 +33,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-2">
-					<p>項目：<input type="text" value="男雙" readonly /></p>
+					<p>項目：<input type="text" value="混雙" readonly /></p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-2">
-					<p>學號：<input type="text" id="id1" onchange="check_id1()" /></p>
+					<p>學號(男)：<input type="text" id="id1" onchange="check_id1()" /></p>
 					<p class="text-danger" id="id1_result"></p>
 					<p>姓名：<input type="text" id="name1" /></p>
 					<p>系別：<input type="text" id="major1" /></p>
@@ -43,17 +54,14 @@
 							<option value="D4">博四</option><option value="D5">博五</option>
 							<option value="D6">博六</option><option value="D7">博七</option>
 					</select></p>
-					<p>聯絡電話：<input type="text" id="phone1" onchange="check_phone1()" /></p>
-					<p class="text-danger" id="phone1_result"></p>
+					<p>聯絡電話：<input type="text" id="phone1" /></p>
 					<p>出生日期：<input class="smaller_box" type="text" id="birthy1" placeholder="西元" /> 年
 						<input class="smallest_box" type="text" id="birthm1" /> 月
-						<input class="smallest_box" type="text" id="birthd1" onchange="check_birth1()" /> 日</p>
-					<p class="text-danger" id="birth1_result"></p>
-					<p>身分證字號：<input type="text" id="identity1" onchange="check_identity1()" /></p>
-					<p class="text-danger" id="identity1_result"></p>
+						<input class="smallest_box" type="text" id="birthd1" /> 日</p>
+					<p>身分證字號：<input type="text" id="identity1" /></p>
 				</div>
 				<div class="col-sm-4">
-					<p>學號：<input type="text" id="id2" onchange="check_id2()" /></p>
+					<p>學號(女)：<input type="text" id="id2" onchange="check_id2()" /></p>
 					<p class="text-danger" id="id2_result"></p>
 					<p>姓名：<input type="text" id="name2" /></p>
 					<p>系別：<input type="text" id="major2" /></p>
@@ -69,19 +77,15 @@
 							<option value="D4">博四</option><option value="D5">博五</option>
 							<option value="D6">博六</option><option value="D7">博七</option>
 					</select></p>
-					<p>聯絡電話：<input type="text" id="phone2" onchange="check_phone2()" /></p>
-					<p class="text-danger" id="phone2_result"></p>
+					<p>聯絡電話：<input type="text" id="phone2" /></p>
 					<p>出生日期：<input class="smaller_box" type="text" id="birthy2" placeholder="西元" /> 年
 						<input class="smallest_box" type="text" id="birthm2" /> 月
-						<input class="smallest_box" type="text" id="birthd2" onchange="check_birth2()" /> 日</p>
-					<p class="text-danger" id="birth2_result"></p>
-					<p>身分證字號：<input type="text" id="identity2" onchange="check_identity2()" /></p>
-					<p class="text-danger" id="identity2_result"></p>
+						<input class="smallest_box" type="text" id="birthd2" /> 日</p>
+					<p>身分證字號：<input type="text" id="identity2" /></p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-2">
-					<p><input type="checkbox" id="check" value="Y" /> 報名確認</p>
 					<button onclick="sign_up()">確定報名</button>
 				</div>
 			</div>
@@ -101,7 +105,7 @@
 		function check_id1() {
 			var request = new XMLHttpRequest();
 			request.open("POST", "service.php");
-			var data = "type=MD&id=" + document.getElementById("id1").value;
+			var data = "type=XD&id=" + document.getElementById("id1").value;
 			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			request.send(data);
 
@@ -118,72 +122,10 @@
 			}
 		}
 
-		function check_birth1() {
-			var request = new XMLHttpRequest();
-			request.open("POST", "service.php");
-			var data = "birthy=" + document.getElementById("birthy1").value
-					+ "&birthm=" + document.getElementById("birthm1").value
-					+ "&birthd=" + document.getElementById("birthd1").value;
-			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			request.send(data);
-
-			request.onreadystatechange = function() {
-				if (request.readyState === 4 && request.status === 200) {              
-					var data = JSON.parse(request.responseText);
-					if (data.msg != 'ok') {
-						document.getElementById("birth1_result").innerHTML = data.msg;
-					}
-					else {
-						document.getElementById("birth1_result").innerHTML = "";
-					}
-				}
-			}
-		}
-
-		function check_phone1() {
-			var request = new XMLHttpRequest();
-			request.open("POST", "service.php");
-			var data = "phone=" + document.getElementById("phone1").value;
-			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			request.send(data);
-
-			request.onreadystatechange = function() {
-				if (request.readyState === 4 && request.status === 200) {
-					var data = JSON.parse(request.responseText);
-					if (data.msg != 'ok') {
-						document.getElementById("phone1_result").innerHTML = data.msg;
-					}
-					else {
-						document.getElementById("phone1_result").innerHTML = "";
-					}
-				}
-			}
-		}
-
-		function check_identity1() {
-			var request = new XMLHttpRequest();
-			request.open("POST", "service.php");
-			var data = "identity=" + document.getElementById("identity1").value;
-			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			request.send(data);
-
-			request.onreadystatechange = function() {
-				if (request.readyState === 4 && request.status === 200) {              
-					var data = JSON.parse(request.responseText);
-					if (data.msg != 'ok') {
-						document.getElementById("identity1_result").innerHTML = data.msg;
-					}
-					else {
-						document.getElementById("identity1_result").innerHTML = "";
-					}
-				}
-			}
-		}
-
 		function check_id2() {
 			var request = new XMLHttpRequest();
 			request.open("POST", "service.php");
-			var data = "type=MD&id=" + document.getElementById("id2").value;
+			var data = "type=XD&id=" + document.getElementById("id2").value;
 			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			request.send(data);
 
@@ -200,72 +142,10 @@
 			}
 		}
 
-		function check_birth2() {
-			var request = new XMLHttpRequest();
-			request.open("POST", "service.php");
-			var data = "birthy=" + document.getElementById("birthy2").value
-					+ "&birthm=" + document.getElementById("birthm2").value
-					+ "&birthd=" + document.getElementById("birthd2").value;
-			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			request.send(data);
-
-			request.onreadystatechange = function() {
-				if (request.readyState === 4 && request.status === 200) {              
-					var data = JSON.parse(request.responseText);
-					if (data.msg != 'ok') {
-						document.getElementById("birth2_result").innerHTML = data.msg;
-					}
-					else {
-						document.getElementById("birth2_result").innerHTML = "";
-					}
-				}
-			}
-		}
-
-		function check_phone2() {
-			var request = new XMLHttpRequest();
-			request.open("POST", "service.php");
-			var data = "phone=" + document.getElementById("phone2").value;
-			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			request.send(data);
-
-			request.onreadystatechange = function() {
-				if (request.readyState === 4 && request.status === 200) {
-					var data = JSON.parse(request.responseText);
-					if (data.msg != 'ok') {
-						document.getElementById("phone2_result").innerHTML = data.msg;
-					}
-					else {
-						document.getElementById("phone2_result").innerHTML = "";
-					}
-				}
-			}
-		}
-
-		function check_identity2() {
-			var request = new XMLHttpRequest();
-			request.open("POST", "service.php");
-			var data = "identity=" + document.getElementById("identity2").value;
-			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			request.send(data);
-
-			request.onreadystatechange = function() {
-				if (request.readyState === 4 && request.status === 200) {              
-					var data = JSON.parse(request.responseText);
-					if (data.msg != 'ok') {
-						document.getElementById("identity2_result").innerHTML = data.msg;
-					}
-					else {
-						document.getElementById("identity2_result").innerHTML = "";
-					}
-				}
-			}
-		}
-
 		function sign_up() {
 			var request = new XMLHttpRequest();
 			request.open("POST", "service.php");
-			var data = "new=MD&type=MD" + 
+			var data = "new=directXD&type=XD" + 
 					   "&id1=" + document.getElementById("id1").value +
 					   "&id2=" + document.getElementById("id2").value +
 					   "&name1=" + document.getElementById("name1").value +
@@ -283,11 +163,7 @@
 					   "&birthd1=" + document.getElementById("birthd1").value +
 					   "&birthd2=" + document.getElementById("birthd2").value +
 					   "&identity1=" + document.getElementById("identity1").value +
-					   "&identity2=" + document.getElementById("identity2").value;
-			var check = document.getElementById("check");
-			if (check.checked){
-				data = data + "&check=" + check.value;
-			}
+					   "&identity_W2=" + document.getElementById("identity2").value;
 			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			request.send(data);
 
