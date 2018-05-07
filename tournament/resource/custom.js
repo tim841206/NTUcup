@@ -351,6 +351,7 @@ function send() {
 				request.send(data);
 				request.onreadystatechange = function() {
 					if (request.readyState === 4 && request.status === 200) {
+						alert(request.responseText);
 						var data = JSON.parse(request.responseText);
 						if (data.message == 'Success') {
 							location.assign("index.php?host=" + data.host + "&gameno=" + data.gameno);
