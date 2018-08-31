@@ -1,40 +1,18 @@
-<?php
-$db = mysql_connect('localhost', 'root', '');
-mysql_query("SET NAMES 'utf8'");
-mysql_select_db('NTUcup', $db);
-
-function querySignup() {
-	$sql = mysql_query("SELECT SIGNUP FROM setup");
-	$fetch = mysql_fetch_row($sql);
-	$return = ($fetch[0] == 1) ? 1 : 0;
-	return $return;
-}
-
-$acceptSignup = querySignup();
-if (!$acceptSignup){
-    ?>
-    <script>
-        alert('已不開放報名');
-        location.replace("index.html");
-    </script>
-    <?php
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="icon.png">
+	<link rel="shortcut icon" href="resource/icon.png">
 	<meta name="description" content="國立臺灣大學台大盃羽球賽報名系統">
 	<meta name="author" content="國立臺灣大學羽球校隊">
 	<title>國立臺灣大學台大盃羽球賽</title>
-	<link href="bootstrap.min.css" rel="stylesheet">
-	<link href="css/jquery.datepick.css" rel="stylesheet">
+	<link href="resource/bootstrap.min.css" rel="stylesheet">
+	<link href="resource/css/jquery.datepick.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/jquery.plugin.min.js"></script>
-<script src="js/jquery.datepick.js"></script>
+<script src="resource/js/jquery.plugin.min.js"></script>
+<script src="resource/js/jquery.datepick.js"></script>
 	<link href="custom.css" rel="stylesheet">
 	<script>
 	$(function() { $('#birth1').datepick(); });
@@ -360,7 +338,7 @@ if (!$acceptSignup){
 	<section class="footer">
 		<div class="container">
 			<div class="row center">
-				<span><a href="https://www.facebook.com/ntubadminton2012/?fref=ts" target="_blank"><img src="facebook.png" class="small_pic"></a></span>
+				<span><a href="https://www.facebook.com/ntubadminton2012" target="_blank"><img src="resource/facebook.png" class="small_pic"></a></span>
 				<span class="small">&copy; 2018 NTU Badminton All Rights Reserved</span>
 			</div>
 		</div>
