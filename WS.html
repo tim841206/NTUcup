@@ -1,0 +1,77 @@
+	<header>
+		<div class="container">
+			<h1 class="center">2018台大盃羽球賽報名表-女單</h1>
+		</div>
+	</header>
+
+	<section class="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+					<p>項目：<input type="text" value="女單" readonly></p>
+					<p>學號：<input type="text" id="id" onchange="check_id()"></p>
+					<p class="text-danger" id="id_result"></p>
+					<p>姓名：<input type="text" id="name"></p>
+					<p>系別：<input type="text" id="major"></p>
+					<p>年級：<select id="grade">
+							<option value=""></option>
+							<option value="B1">大一</option><option value="B2">大二</option>
+							<option value="B3">大三</option><option value="B4">大四</option>
+							<option value="B5">大五</option><option value="B6">大六</option>
+							<option value="B7">大七</option><option value="R1">碩一</option>
+							<option value="R2">碩二</option><option value="R3">碩三</option>
+							<option value="R4">碩四</option><option value="D1">博一</option>
+							<option value="D2">博二</option><option value="D3">博三</option>
+							<option value="D4">博四</option><option value="D5">博五</option>
+							<option value="D6">博六</option><option value="D7">博七</option>
+					</select></p>
+					<p>聯絡電話：<input type="text" id="phone" onchange="check_phone()"></p>
+					<p class="text-danger" id="phone_result"></p>
+					<p>出生日期：<input class="smaller_box" type="text" name="birth" placeholder="西元"> 年
+						<input class="smallest_box" type="text" name="birth"> 月
+						<input class="smallest_box" type="text" name="birth" onchange="check_birth()"> 日</p>
+					<p class="text-danger" id="birth_result"></p>
+					<p>身分證字號：<input type="text" id="identity" onchange="check_identityF()"></p>
+					<p class="text-danger" id="identity_result"></p>
+					<p><input type="checkbox" id="check" value="Y"> 報名確認</p>
+					<button onclick="sign_up()">確定報名</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script type="text/javascript">
+		function sign_up() {
+			var request = new XMLHttpRequest();
+			request.open("POST", "service.php");
+			var data = "new=WS&type=WS" + 
+					   "&id=" + document.getElementById("id").value +
+					   "&name=" + document.getElementById("name").value +
+					   "&major=" + document.getElementById("major").value +
+					   "&grade=" + document.getElementById("grade").value +
+					   "&phone=" + document.getElementById("phone").value +
+					   "&birthy=" + document.getElementsByName("birth")[0].value +
+					   "&birthm=" + document.getElementsByName("birth")[1].value +
+					   "&birthd=" + document.getElementsByName("birth")[2].value +
+					   "&identity_W=" + document.getElementById("identity").value;
+			var check = document.getElementById("check");
+			if (check.checked){
+				data = data + "&check=" + check.value;
+			}
+			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			request.send(data);
+
+			request.onreadystatechange = function() {
+				if (request.readyState === 4 && request.status === 200){
+					var data = JSON.parse(request.responseText);
+					if (data.msg == 'ok'){
+						alert('報名成功，您的編號為 ' + data.num + '。請於指定時間內繳費');
+						location.replace("index.html");
+					}
+					else {
+						alert(data.msg);
+					}
+				}
+			}
+		}
+	</script>
