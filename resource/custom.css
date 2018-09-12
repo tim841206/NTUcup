@@ -27,24 +27,6 @@
     border: 1px solid #ff656c;
 }
 
-td select {
-    border-radius: 5px;
-    border-color: white;
-}
-
-td input {
-    border-radius: 5px;
-}
-
-th {
-    text-align: center;
-}
-
-.no-empty {
-    border-radius: 5px;
-    border-color: red;
-}
-
 .content {
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -57,13 +39,6 @@ th {
 
 .center {
 	text-align: center;
-}
-
-.middle_box input {
-    width: 105px;
-    border: 1px solid #ccc;
-    padding-left: 3px;
-    outline: none;
 }
 
 .smaller_box {

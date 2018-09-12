@@ -1,6 +1,6 @@
 	<header>
 		<div class="container">
-			<h1 class="center">2018台大盃羽球賽報名表-男雙</h1>
+			<h1 class="center">2019台大盃羽球賽報名表-女雙</h1>
 		</div>
 	</header>
 
@@ -8,12 +8,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-2">
-					<p>項目：<input type="text" value="男雙" readonly></p>
+					<p>項目：<input type="text" value="女雙" readonly></p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-2">
-					<p>學號：<input type="text" id="id1" onchange="check_id()"></p>
+					<p>學號：<input type="text" id="id1" onchange="check_id('id1')"></p>
 					<p class="text-danger" id="id1_result"></p>
 					<p>姓名：<input type="text" id="name1"></p>
 					<p>系別：<input type="text" id="major1"></p>
@@ -36,7 +36,7 @@
 					<p>身分證字號：<input type="text" id="identity1"></p>
 				</div>
 				<div class="col-sm-4">
-					<p>學號：<input type="text" id="id2" onchange="check_id()"></p>
+					<p>學號：<input type="text" id="id2" onchange="check_id('id2')"></p>
 					<p class="text-danger" id="id2_result"></p>
 					<p>姓名：<input type="text" id="name2"></p>
 					<p>系別：<input type="text" id="major2"></p>
@@ -70,8 +70,8 @@
 	<script type="text/javascript">
 		function sign_up() {
 			var request = new XMLHttpRequest();
-			request.open("POST", "service.php");
-			var data = "new=directMD&type=MD" + 
+			request.open("POST", "index.php");
+			var data = "service=signup&type=directWD" + 
 					   "&id1=" + document.getElementById("id1").value +
 					   "&id2=" + document.getElementById("id2").value +
 					   "&name1=" + document.getElementById("name1").value +
@@ -88,8 +88,8 @@
 					   "&birthm2=" + document.getElementsByName("birth2")[1].value +
 					   "&birthd1=" + document.getElementsByName("birth1")[2].value +
 					   "&birthd2=" + document.getElementsByName("birth2")[2].value +
-					   "&identity1=" + document.getElementById("identity1").value +
-					   "&identity2=" + document.getElementById("identity2").value;
+					   "&identity_W1=" + document.getElementById("identity1").value +
+					   "&identity_W2=" + document.getElementById("identity2").value;
 			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			request.send(data);
 
@@ -98,10 +98,10 @@
 					var data = JSON.parse(request.responseText);
 					if (data.msg == 'ok'){
 						alert('報名成功，您的編號為 ' + data.num + '。請於指定時間內繳費');
-						location.replace("index.html");
+						location.replace("index.php?route=manager");
 					}
 					else {
-						alert(data.msg);
+						alert(data);
 					}
 				}
 			}

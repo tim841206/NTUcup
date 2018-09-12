@@ -1,34 +1,32 @@
 <?php
-$db = mysql_connect('localhost', 'root', '');
-mysql_query("SET NAMES 'utf8'");
-mysql_select_db('NTUcup', $db);
+$mysql = mysql_connect('localhost', 'root', '');
+mysqli_query($mysql, "SET NAMES 'utf8'");
+mysqli_select_db($mysql, 'NTUcup');
 
-function queryMember() {
-	$sql = mysql_query("SELECT MEMBER FROM setup");
-	$fetch = mysql_fetch_row($sql);
-	$return = ($fetch[0] == 1) ? 1 : 0;
-	return $return;
-}
+$sql = mysqli_query($mysql, "SELECT MEMBER FROM setup");
+$fetch = mysqli_fetch_row($sql);
+$acceptMember = ($fetch[0] == 1) ? 1 : 0;
 
-$acceptMember = queryMember();
 if (!$acceptMember){
     ?>
     <script>
         alert('團體賽隊員名單暫不開放');
-        location.replace("index.html");
+        location.replace("index.php");
     </script>
     <?php
 }
 else {
-	$content = '';
-	$sql1 = mysql_query("SELECT * FROM G");
-	while ($fetch1 = mysql_fetch_array($sql1)) {
-		$content .= $fetch1['Gmajor'].' '.$fetch1['Gname'].'<br>';
-		for ($i = 1; $i <= 12; $i++) {
-			$content .= $fetch1['NAME_'.$i].' ';
+	$sql1 = mysqli_query($mysql, "SELECT * FROM G");
+	while ($fetch1 = mysqli_fetch_array($sql1)) {
+		echo "<table><tr><th colspan='2'>隊別</th><th colspan='4'>".$fetch1['Gmajor'].$fetch1['Gname']."</th></tr>";
+		echo "<tr>";
+		for ($i = 1; $i <= 6; $i++) {
+			echo "<td>".$fetch1['NAME_'.$i]."</td>";
 		}
-		$content .= '<br>';
+		echo "</tr><tr>";
+		for ($i = 7; $i <= 12; $i++) {
+			echo "<td>".$fetch1['NAME_'.$i]."</td>";
+		}
+		echo "</tr></table><br>";
 	}
-	echo $content;
 }
-?>

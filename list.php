@@ -1,28 +1,30 @@
 <?php
-function transfer_grade($grade) {
-    if ($grade == 'B1') {return '大一';}
-    else if ($grade == 'B2') {return '大二';}
-    else if ($grade == 'B3') {return '大三';}
-    else if ($grade == 'B4') {return '大四';}
-    else if ($grade == 'B5') {return '大五';}
-    else if ($grade == 'B6') {return '大六';}
-    else if ($grade == 'B7') {return '大七';}
-    else if ($grade == 'R1') {return '碩一';}
-    else if ($grade == 'R2') {return '碩二';}
-    else if ($grade == 'R3') {return '碩三';}
-    else if ($grade == 'R4') {return '碩四';}
-    else if ($grade == 'D1') {return '博一';}
-    else if ($grade == 'D2') {return '博二';}
-    else if ($grade == 'D3') {return '博三';}
-    else if ($grade == 'D4') {return '博四';}
-    else if ($grade == 'D5') {return '博五';}
-    else if ($grade == 'D6') {return '博六';}
-    else if ($grade == 'D7') {return '博七';}
+function translate_grade($grade) {
+    if ($grade == 'B1') return '大一';
+    elseif ($grade == 'B2') return '大二';
+    elseif ($grade == 'B3') return '大三';
+    elseif ($grade == 'B4') return '大四';
+    elseif ($grade == 'B5') return '大五';
+    elseif ($grade == 'B6') return '大六';
+    elseif ($grade == 'B7') return '大七';
+    elseif ($grade == 'R1') return '碩一';
+    elseif ($grade == 'R2') return '碩二';
+    elseif ($grade == 'R3') return '碩三';
+    elseif ($grade == 'R4') return '碩四';
+    elseif ($grade == 'D1') return '博一';
+    elseif ($grade == 'D2') return '博二';
+    elseif ($grade == 'D3') return '博三';
+    elseif ($grade == 'D4') return '博四';
+    elseif ($grade == 'D5') return '博五';
+    elseif ($grade == 'D6') return '博六';
+    elseif ($grade == 'D7') return '博七';
 }
-function transfer_paystat($paystat) {
-    if ($paystat == 0) {return '未繳費';}
-    elseif ($paystat == 1) {return '已繳費';}
+
+function translate_paystat($paystat) {
+    if ($paystat == 0) return '未繳費';
+    elseif ($paystat == 1) return '已繳費';
 }
+
 $db = mysql_connect('localhost', 'root', '');
 mysql_query("SET NAMES 'utf8'");
 mysql_select_db('NTUcup', $db);
@@ -72,22 +74,15 @@ $numG = mysql_num_rows($queryG);
                         <div id="collapse1" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <table border="2" width="100%">
-                                    <tr>
-                                        <th>編號</th>
-                                        <th>系級</th>
-                                        <th>姓名</th>
-                                        <th>繳費狀態</th>
-                                    </tr>
                                     <?php
-                                    while ($result = mysql_fetch_array($queryMS)){
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $result['NUM'];?></td>
-                                            <td><?php echo $result['MAJOR'].transfer_grade($result['GRADE']);?></td>
-                                            <td><?php echo $result['NAME'];?></td>
-                                            <td><?php echo transfer_paystat($result['PAYSTAT']);?></td>
-                                        </tr>
-                                        <?php
+                                    if ($numMS == 0) {
+                                        echo "目前尚無選手報名";
+                                    }
+                                    else {
+                                        echo "<tr><th>編號</th><th>系級</th><th>姓名</th><th>繳費狀態</th></tr>";
+                                        while ($result = mysqli_fetch_array($queryMS)) {
+                                            echo "<tr><td>".$result['NUM']."</td><td>".$result['MAJOR'].translate_grade($result['GRADE'])."</td><td>".$result['NAME']."</td><td>".translate_paystat($result['PAYSTAT'])."</td></tr>";
+                                        }
                                     }
                                     ?>
                                 </table>
@@ -101,22 +96,15 @@ $numG = mysql_num_rows($queryG);
                         <div id="collapse2" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <table border="2" width="100%">
-                                    <tr>
-                                        <th>編號</th>
-                                        <th>系級</th>
-                                        <th>姓名</th>
-                                        <th>繳費狀態</th>
-                                    </tr>
                                     <?php
-                                    while ($result = mysql_fetch_array($queryWS)){
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $result['NUM'];?></td>
-                                            <td><?php echo $result['MAJOR'].transfer_grade($result['GRADE']);?></td>
-                                            <td><?php echo $result['NAME'];?></td>
-                                            <td><?php echo transfer_paystat($result['PAYSTAT']);?></td>
-                                        </tr>
-                                        <?php
+                                    if ($numWS == 0) {
+                                        echo "目前尚無選手報名";
+                                    }
+                                    else {
+                                        echo "<tr><th>編號</th><th>系級</th><th>姓名</th><th>繳費狀態</th></tr>";
+                                        while ($result = mysqli_fetch_array($queryWS)){
+                                            echo "<tr><td>".$result['NUM']."</td><td>".$result['MAJOR'].translate_grade($result['GRADE'])."</td><td>".$result['NAME']."</td><td>".translate_paystat($result['PAYSTAT'])."</td></tr>";
+                                        }
                                     }
                                     ?>
                                 </table>
@@ -130,26 +118,15 @@ $numG = mysql_num_rows($queryG);
                         <div id="collapse3" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <table border="2" width="100%">
-                                    <tr>
-                                        <th>編號</th>
-                                        <th>系級</th>
-                                        <th>姓名</th>
-                                        <th>系級</th>
-                                        <th>姓名</th>
-                                        <th>繳費狀態</th>
-                                    </tr>
                                     <?php
-                                    while ($result = mysql_fetch_array($queryMD)){
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $result['NUM'];?></td>
-                                            <td><?php echo $result['MAJOR_1'].transfer_grade($result['GRADE_1']);?></td>
-                                            <td><?php echo $result['NAME_1'];?></td>
-                                            <td><?php echo $result['MAJOR_2'].transfer_grade($result['GRADE_2']);?></td>
-                                            <td><?php echo $result['NAME_2'];?></td>
-                                            <td><?php echo transfer_paystat($result['PAYSTAT']);?></td>
-                                        </tr>
-                                        <?php
+                                    if ($numMD == 0) {
+                                        echo "目前尚無選手報名";
+                                    }
+                                    else {
+                                        echo "<tr><th>編號</th><th>系級</th><th>姓名</th><th>系級</th><th>姓名</th><th>繳費狀態</th></tr>";
+                                        while ($result = mysqli_fetch_array($queryMD)){
+                                            echo "<tr><td>".$result['NUM']."</td><td>".$result['MAJOR_1'].translate_grade($result['GRADE_1'])."</td><td>".$result['NAME_1']."</td><td>".$result['MAJOR_2'].translate_grade($result['GRADE_2'])."</td><td>".$result['NAME_2']."</td><td>".translate_paystat($result['PAYSTAT'])."</td></tr>";
+                                        }
                                     }
                                     ?>
                                 </table>
@@ -163,26 +140,15 @@ $numG = mysql_num_rows($queryG);
                         <div id="collapse4" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <table border="2" width="100%">
-                                    <tr>
-                                        <th>編號</th>
-                                        <th>系級</th>
-                                        <th>姓名</th>
-                                        <th>系級</th>
-                                        <th>姓名</th>
-                                        <th>繳費狀態</th>
-                                    </tr>
                                     <?php
-                                    while ($result = mysql_fetch_array($queryWD)){
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $result['NUM'];?></td>
-                                            <td><?php echo $result['MAJOR_1'].transfer_grade($result['GRADE_1']);?></td>
-                                            <td><?php echo $result['NAME_1'];?></td>
-                                            <td><?php echo $result['MAJOR_2'].transfer_grade($result['GRADE_2']);?></td>
-                                            <td><?php echo $result['NAME_2'];?></td>
-                                            <td><?php echo transfer_paystat($result['PAYSTAT']);?></td>
-                                        </tr>
-                                        <?php
+                                    if ($numWD == 0) {
+                                        echo "目前尚無選手報名";
+                                    }
+                                    else {
+                                        echo "<tr><th>編號</th><th>系級</th><th>姓名</th><th>系級</th><th>姓名</th><th>繳費狀態</th></tr>";
+                                        while ($result = mysqli_fetch_array($queryWD)){
+                                            echo "<tr><td>".$result['NUM']."</td><td>".$result['MAJOR_1'].translate_grade($result['GRADE_1'])."</td><td>".$result['NAME_1']."</td><td>".$result['MAJOR_2'].translate_grade($result['GRADE_2'])."</td><td>".$result['NAME_2']."</td><td>".translate_paystat($result['PAYSTAT'])."</td></tr>";
+                                        }
                                     }
                                     ?>
                                 </table>
@@ -196,26 +162,15 @@ $numG = mysql_num_rows($queryG);
                         <div id="collapse5" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <table border="2" width="100%">
-                                    <tr>
-                                        <th>編號</th>
-                                        <th>系級</th>
-                                        <th>姓名</th>
-                                        <th>系級</th>
-                                        <th>姓名</th>
-                                        <th>繳費狀態</th>
-                                    </tr>
                                     <?php
-                                    while ($result = mysql_fetch_array($queryXD)){
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $result['NUM'];?></td>
-                                            <td><?php echo $result['MAJOR_1'].transfer_grade($result['GRADE_1']);?></td>
-                                            <td><?php echo $result['NAME_1'];?></td>
-                                            <td><?php echo $result['MAJOR_2'].transfer_grade($result['GRADE_2']);?></td>
-                                            <td><?php echo $result['NAME_2'];?></td>
-                                            <td><?php echo transfer_paystat($result['PAYSTAT']);?></td>
-                                        </tr>
-                                        <?php
+                                    if ($numXD == 0) {
+                                        echo "目前尚無選手報名";
+                                    }
+                                    else {
+                                        echo "<tr><th>編號</th><th>系級</th><th>姓名</th><th>系級</th><th>姓名</th><th>繳費狀態</th></tr>";
+                                        while ($result = mysqli_fetch_array($queryXD)){
+                                            echo "<tr><td>".$result['NUM']."</td><td>".$result['MAJOR_1'].translate_grade($result['GRADE_1'])."</td><td>".$result['NAME_1']."</td><td>".$result['MAJOR_2'].translate_grade($result['GRADE_2'])."</td><td>".$result['NAME_2']."</td><td>".translate_paystat($result['PAYSTAT'])."</td></tr>";
+                                        }
                                     }
                                     ?>
                                 </table>
@@ -229,22 +184,15 @@ $numG = mysql_num_rows($queryG);
                         <div id="collapse6" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <table border="2" width="100%">
-                                    <tr>
-                                        <th>編號</th>
-                                        <th>系所</th>
-                                        <th>隊名</th>
-                                        <th>繳費狀態</th>
-                                    </tr>
                                     <?php
-                                    while ($result = mysql_fetch_array($queryG)){
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $result['NUM'];?></td>
-                                            <td><?php echo $result['Gmajor'];?></td>
-                                            <td><?php echo $result['Gname'];?></td>
-                                            <td><?php echo transfer_paystat($result['PAYSTAT']);?></td>
-                                        </tr>
-                                        <?php
+                                    if ($numG == 0) {
+                                        echo "目前尚無隊伍報名";
+                                    }
+                                    else {
+                                        echo "<tr><th>編號</th><th>隊別</th><th>繳費狀態</th></tr>";
+                                        while ($result = mysqli_fetch_array($queryG)){
+                                            echo "<tr><td>".$result['NUM']."</td><td>".$result['Gmajor'].$result['Gname']."</td><td>".translate_paystat($result['PAYSTAT'])."</td></tr>";
+                                        }
                                     }
                                     ?>
                                 </table>
@@ -256,7 +204,7 @@ $numG = mysql_num_rows($queryG);
             <div class="col-sm-4 center">
                 <h3>查看繳費狀態</h3><br>
                 <h4>請輸入學生證號碼或項目及編號</h4>
-                <p>學生證號碼：<input type="text" id="id" /> <button onclick="search1()">查詢</button></p>
+                <p>學生證號碼：<input type="text" id="id"><button onclick="search1()">查詢</button></p>
                 <p>項目：<select id="type">
                         <option value="A">男單</option>
                         <option value="B">女單</option>
@@ -264,29 +212,29 @@ $numG = mysql_num_rows($queryG);
                         <option value="D">女雙</option>
                         <option value="E">混雙</option>
                         <option value="F">團體</option></select>
-                編號：<input type="text" id="num" style="width: 117px;"/> <button onclick="search2()">查詢</button></p>
+                編號：<input type="text" id="num"><button onclick="search2()">查詢</button></p>
                 <h4>查詢結果</h4>
                 <div class="row">
                     <div class="col-sm-3 center">
-                        <h5>項目編號</h5>
+                        <h4>項目編號</h4>
                         <p id="num_1"></p>
                         <p id="num_2"></p>
                         <p id="num_3"></p>
                     </div>
                     <div class="col-sm-3 center">
-                        <h5>系級</h5>
+                        <h4>系級</h4>
                         <p id="grade_1"></p>
                         <p id="grade_2"></p>
                         <p id="grade_3"></p>
                     </div>
                     <div class="col-sm-3 center">
-                        <h5>姓名</h5>
+                        <h4>姓名</h4>
                         <p id="name_1"></p>
                         <p id="name_2"></p>
                         <p id="name_3"></p>
                     </div>
                     <div class="col-sm-3 center">
-                        <h5>繳費狀態</h5>
+                        <h4>繳費狀態</h4>
                         <p id="paystat_1"></p>
                         <p id="paystat_2"></p>
                         <p id="paystat_3"></p>
@@ -295,23 +243,16 @@ $numG = mysql_num_rows($queryG);
             </div>
         </div>
         <br>
-        <div class="center"><a href="index.html"><button>返回首頁</button></a></div>
+        <div class="center"><a href="index.php"><button>返回首頁</button></a></div>
     </div>
-
-    <section class="footer">
-        <div class="container">
-            <div class="row center">
-                <span><a href="https://www.facebook.com/ntubadminton2012/?fref=ts" target="_blank"><img src="facebook.png" class="small_pic" /></a></span>
-                <span class="small">&copy; 2018 NTU Badminton All Rights Reserved</span>
-            </div>
-        </div>
-    </section>
 
     <script type="text/javascript">
         function search1() {
             var request = new XMLHttpRequest();
-            request.open("GET", "service.php?id=" + document.getElementById("id").value);
-            request.send();
+            request.open("POST", "index.php");
+            var data = "service=search&id=" + document.getElementById("id").value;
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.send(data);
 
             request.onreadystatechange = function() {
                 if (request.readyState === 4 && request.status === 200) {
@@ -327,12 +268,6 @@ $numG = mysql_num_rows($queryG);
                         document.getElementById("grade_2").innerHTML = data.grade_2;
                         document.getElementById("name_2").innerHTML = data.name_2;
                         document.getElementById("paystat_2").innerHTML = data.paystat_2;
-                    }
-                    if (data.num_3) {
-                        document.getElementById("num_3").innerHTML = data.num_3;
-                        document.getElementById("grade_3").innerHTML = data.grade_3;
-                        document.getElementById("name_3").innerHTML = data.name_3;
-                        document.getElementById("paystat_3").innerHTML = data.paystat_3;
                     }
                     if (data.null) {
                         alert("查無資料");
@@ -343,9 +278,10 @@ $numG = mysql_num_rows($queryG);
 
         function search2() {
             var request = new XMLHttpRequest();
-            request.open("GET", "service.php?type=" + document.getElementById("type").value +
-                                            "&num=" + document.getElementById("num").value);
-            request.send();
+            request.open("POST", "index.php");
+            var data = "service=search&type=" + document.getElementById("type").value + "&num=" + document.getElementById("num").value;
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.send(data);
 
             request.onreadystatechange = function() {
                 if (request.readyState === 4 && request.status === 200) {
@@ -362,12 +298,6 @@ $numG = mysql_num_rows($queryG);
                         document.getElementById("name_2").innerHTML = data.name_2;
                         document.getElementById("paystat_2").innerHTML = data.paystat_2;
                     }
-                    if (data.num_3) {
-                        document.getElementById("num_3").innerHTML = data.num_3;
-                        document.getElementById("grade_3").innerHTML = data.grade_3;
-                        document.getElementById("name_3").innerHTML = data.name_3;
-                        document.getElementById("paystat_3").innerHTML = data.paystat_3;
-                    }
                     if (data.null) {
                         alert("查無資料");
                     }
@@ -375,5 +305,3 @@ $numG = mysql_num_rows($queryG);
             }
         }
     </script>
-</body>
-</html>

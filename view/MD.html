@@ -1,6 +1,6 @@
 	<header>
 		<div class="container">
-			<h1 class="center">2018台大盃羽球賽報名表-女雙</h1>
+			<h1 class="center">2019台大盃羽球賽報名表-男雙</h1>
 		</div>
 	</header>
 
@@ -8,12 +8,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-2">
-					<p>項目：<input type="text" value="女雙" readonly></p>
+					<p>項目：<input type="text" value="男雙" readonly></p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-2">
-					<p>學號：<input type="text" id="id1" onchange="check_id()"></p>
+					<p>學號：<input type="text" id="id1" onchange="check_id('MD', 'id1')"></p>
 					<p class="text-danger" id="id1_result"></p>
 					<p>姓名：<input type="text" id="name1"></p>
 					<p>系別：<input type="text" id="major1"></p>
@@ -29,17 +29,17 @@
 							<option value="D4">博四</option><option value="D5">博五</option>
 							<option value="D6">博六</option><option value="D7">博七</option>
 					</select></p>
-					<p>聯絡電話：<input type="text" id="phone1" onchange="check_phone()"></p>
+					<p>聯絡電話：<input type="text" id="phone1" onchange="check_phone('MD', 'phone1')"></p>
 					<p class="text-danger" id="phone1_result"></p>
 					<p>出生日期：<input class="smaller_box" type="text" name="birth1" placeholder="西元"> 年
 						<input class="smallest_box" type="text" name="birth1"> 月
-						<input class="smallest_box" type="text" name="birth1" onchange="check_birth()"> 日</p>
+						<input class="smallest_box" type="text" name="birth1" onchange="check_birth('MD', 'birth1')"> 日</p>
 					<p class="text-danger" id="birth1_result"></p>
-					<p>身分證字號：<input type="text" id="identity1" onchange="check_identityF()"></p>
+					<p>身分證字號：<input type="text" id="identity1" onchange="check_identityM('MD', 'identity1')"></p>
 					<p class="text-danger" id="identity1_result"></p>
 				</div>
 				<div class="col-sm-4">
-					<p>學號：<input type="text" id="id2" onchange="check_id()"></p>
+					<p>學號：<input type="text" id="id2" onchange="check_id('MD', 'id2')"></p>
 					<p class="text-danger" id="id2_result"></p>
 					<p>姓名：<input type="text" id="name2"></p>
 					<p>系別：<input type="text" id="major2"></p>
@@ -55,13 +55,13 @@
 							<option value="D4">博四</option><option value="D5">博五</option>
 							<option value="D6">博六</option><option value="D7">博七</option>
 					</select></p>
-					<p>聯絡電話：<input type="text" id="phone2" onchange="check_phone()"></p>
+					<p>聯絡電話：<input type="text" id="phone2" onchange="check_phone('MD', 'phone2')"></p>
 					<p class="text-danger" id="phone2_result"></p>
 					<p>出生日期：<input class="smaller_box" type="text" name="birth2" placeholder="西元"> 年
 						<input class="smallest_box" type="text" name="birth2"> 月
-						<input class="smallest_box" type="text" name="birth2" onchange="check_birth()"> 日</p>
+						<input class="smallest_box" type="text" name="birth2" onchange="check_birth('MD', 'birth2')"> 日</p>
 					<p class="text-danger" id="birth2_result"></p>
-					<p>身分證字號：<input type="text" id="identity2" onchange="check_identityF()"></p>
+					<p>身分證字號：<input type="text" id="identity2" onchange="check_identityM('MD', 'identity2')"></p>
 					<p class="text-danger" id="identity2_result"></p>
 				</div>
 			</div>
@@ -78,7 +78,7 @@
 		function sign_up() {
 			var request = new XMLHttpRequest();
 			request.open("POST", "service.php");
-			var data = "new=WD&type=WD" + 
+			var data = "new=MD&type=MD" + 
 					   "&id1=" + document.getElementById("id1").value +
 					   "&id2=" + document.getElementById("id2").value +
 					   "&name1=" + document.getElementById("name1").value +
@@ -95,8 +95,8 @@
 					   "&birthm2=" + document.getElementsByName("birth2")[1].value +
 					   "&birthd1=" + document.getElementsByName("birth1")[2].value +
 					   "&birthd2=" + document.getElementsByName("birth2")[2].value +
-					   "&identity_W1=" + document.getElementById("identity1").value +
-					   "&identity_W2=" + document.getElementById("identity2").value;
+					   "&identity1=" + document.getElementById("identity1").value +
+					   "&identity2=" + document.getElementById("identity2").value;
 			var check = document.getElementById("check");
 			if (check.checked){
 				data = data + "&check=" + check.value;
@@ -109,10 +109,10 @@
 					var data = JSON.parse(request.responseText);
 					if (data.msg == 'ok'){
 						alert('報名成功，您的編號為 ' + data.num + '。請於指定時間內繳費');
-						location.replace("index.html");
+						location.replace("index.php");
 					}
 					else {
-						alert(data.msg);
+						alert(data);
 					}
 				}
 			}

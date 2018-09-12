@@ -77,15 +77,17 @@ CREATE TABLE `setup` (
   `MD_NUM` smallint(6) NOT NULL,
   `WD_NUM` smallint(6) NOT NULL,
   `XD_NUM` smallint(6) NOT NULL,
-  `G_NUM` smallint(6) NOT NULL
+  `G_NUM` smallint(6) NOT NULL,
+  `MEMBER` tinyint(1) NOT NULL DEFAULT '0',
+  `SIGNUP` tinyint(1) NOT NULL DEFAULT '1',
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='設定檔';
 
 --
 -- 資料表的匯出資料 `setup`
 --
 
-INSERT INTO `setup` (`MS_NUM`, `WS_NUM`, `MD_NUM`, `WD_NUM`, `XD_NUM`, `G_NUM`) VALUES
-(1, 1, 1, 1, 1, 1);
+INSERT INTO `setup` (`MS_NUM`, `WS_NUM`, `MD_NUM`, `WD_NUM`, `XD_NUM`, `G_NUM`, `MEMBER`, `SIGNUP`) VALUES
+(1, 1, 1, 1, 1, 1, 0, 1);
 
 -- --------------------------------------------------------
 
