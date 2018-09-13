@@ -41,10 +41,6 @@
 	text-align: center;
 }
 
-.smaller_box {
-	width: 55px;
-}
-
 .smallest_box {
 	width: 35px;
 }
@@ -72,4 +68,16 @@
 
 .tab_12 {
 	padding-left: 12em;
+}
+
+th, td {
+    text-align: center;
+}
+
+.middle_box th, td {
+    padding: 1px 1px;
+}
+
+.middle_box input {
+    width: 100px;
 }

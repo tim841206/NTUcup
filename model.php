@@ -66,67 +66,67 @@ function search1($id) {
     mysqli_select_db($mysql, 'NTUcup');
     $count = 1;
     $id = strtoupper(safe($id));
-    $queryMS = "SELECT * FROM MS WHERE ID='$id'";
-    $queryresult_MS = mysqli_fetch_array(mysqli_query($mysql, $queryMS));
-    $queryWS = "SELECT * FROM WS WHERE ID='$id'";
-    $queryresult_WS = mysqli_fetch_array(mysqli_query($mysql, $queryWS));
-    $queryMD_1 = "SELECT * FROM MD WHERE ID_1='$id'";
-    $queryresult_MD_1 = mysqli_fetch_array(mysqli_query($mysql, $queryMD_1));
-    $queryMD_2 = "SELECT * FROM MD WHERE ID_2='$id'";
-    $queryresult_MD_2 = mysqli_fetch_array(mysqli_query($mysql, $queryMD_2));
-    $queryWD_1 = "SELECT * FROM WD WHERE ID_1='$id'";
-    $queryresult_WD_1 = mysqli_fetch_array(mysqli_query($mysql, $queryWD_1));
-    $queryWD_2 = "SELECT * FROM WD WHERE ID_2='$id'";
-    $queryresult_WD_2 = mysqli_fetch_array(mysqli_query($mysql, $queryWD_2));
-    $queryXD_1 = "SELECT * FROM XD WHERE ID_1='$id'";
-    $queryresult_XD_1 = mysqli_fetch_array(mysqli_query($mysql, $queryXD_1));
-    $queryXD_2 = "SELECT * FROM XD WHERE ID_2='$id'";
-    $queryresult_XD_2 = mysqli_fetch_array(mysqli_query($mysql, $queryXD_2));
-    $queryG_1 = "SELECT * FROM G WHERE ID_1='$id'";
-    $queryresult_G = mysql_fetch_array(mysql_query($queryG_1));
+    $queryMS = mysqli_query($mysql, "SELECT * FROM MS WHERE ID='$id'");
+    $queryresult_MS = ($queryMS == false) ? false : mysqli_fetch_array($queryMS);
+    $queryWS = mysqli_query($mysql, "SELECT * FROM WS WHERE ID='$id'");
+    $queryresult_WS = ($queryWS == false) ? false : mysqli_fetch_array($queryWS);
+    $queryMD_1 = mysqli_query($mysql, "SELECT * FROM MD WHERE ID_1='$id'");
+    $queryresult_MD_1 = ($queryMD_1 == false) ? false : mysqli_fetch_array($queryMD_1);
+    $queryMD_2 = mysqli_query($mysql, "SELECT * FROM MD WHERE ID_2='$id'");
+    $queryresult_MD_2 = ($queryMD_2 == false) ? false : mysqli_fetch_array($queryMD_2);
+    $queryWD_1 = mysqli_query($mysql, "SELECT * FROM WD WHERE ID_1='$id'");
+    $queryresult_WD_1 = ($queryWD_1 == false) ? false : mysqli_fetch_array($queryWD_1);
+    $queryWD_2 = mysqli_query($mysql, "SELECT * FROM WD WHERE ID_2='$id'");
+    $queryresult_WD_2 = ($queryWD_2 == false) ? false : mysqli_fetch_array($queryWD_2);
+    $queryXD_1 = mysqli_query($mysql, "SELECT * FROM XD WHERE ID_1='$id'");
+    $queryresult_XD_1 = ($queryXD_1 == false) ? false : mysqli_fetch_array($queryXD_1);
+    $queryXD_2 = mysqli_query($mysql, "SELECT * FROM XD WHERE ID_2='$id'");
+    $queryresult_XD_2 = ($queryXD_2 == false) ? false : mysqli_fetch_array($queryXD_2);
+    $queryG_1 = mysqli_query($mysql, "SELECT * FROM G WHERE ID_1='$id'");
+    $queryresult_G = ($queryG_1 == false) ? false : mysqli_fetch_array($queryG_1);
     if (!$queryresult_G){
-        $queryG_2 = "SELECT * FROM G WHERE ID_2='$id'";
-        $queryresult_G = mysql_fetch_array(mysql_query($queryG_2));
+        $queryG_2 = mysqli_query($mysql, "SELECT * FROM G WHERE ID_2='$id'");
+        $queryresult_G = ($queryG_2 == false) ? false : mysqli_fetch_array($queryG_2);
     }
     if (!$queryresult_G){
-        $queryG_3 = "SELECT * FROM G WHERE ID_3='$id'";
-        $queryresult_G = mysql_fetch_array(mysql_query($queryG_3));
+        $queryG_3 = mysqli_query($mysql, "SELECT * FROM G WHERE ID_3='$id'");
+        $queryresult_G = ($queryG_3 == false) ? false : mysqli_fetch_array($queryG_3);
     }
     if (!$queryresult_G){
-        $queryG_4 = "SELECT * FROM G WHERE ID_4='$id'";
-        $queryresult_G = mysql_fetch_array(mysql_query($queryG_4));
+        $queryG_4 = mysqli_query($mysql, "SELECT * FROM G WHERE ID_4='$id'");
+        $queryresult_G = ($queryG_4 == false) ? false : mysqli_fetch_array($queryG_4);
     }
     if (!$queryresult_G){
-        $queryG_5 = "SELECT * FROM G WHERE ID_5='$id'";
-        $queryresult_G = mysql_fetch_array(mysql_query($queryG_5));
+        $queryG_5 = mysqli_query($mysql, "SELECT * FROM G WHERE ID_5='$id'");
+        $queryresult_G = ($queryG_5 == false) ? false : mysqli_fetch_array($queryG_5);
     }
     if (!$queryresult_G){
-        $queryG_6 = "SELECT * FROM G WHERE ID_6='$id'";
-        $queryresult_G = mysql_fetch_array(mysql_query($queryG_6));
+        $queryG_6 = mysqli_query($mysql, "SELECT * FROM G WHERE ID_6='$id'");
+        $queryresult_G = ($queryG_6 == false) ? false : mysqli_fetch_array($queryG_6);
     }
     if (!$queryresult_G){
-        $queryG_7 = "SELECT * FROM G WHERE ID_7='$id'";
-        $queryresult_G = mysql_fetch_array(mysql_query($queryG_7));
+        $queryG_7 = mysqli_query($mysql, "SELECT * FROM G WHERE ID_7='$id'");
+        $queryresult_G = ($queryG_7 == false) ? false : mysqli_fetch_array($queryG_7);
     }
     if (!$queryresult_G){
-        $queryG_8 = "SELECT * FROM G WHERE ID_8='$id'";
-        $queryresult_G = mysql_fetch_array(mysql_query($queryG_8));
+        $queryG_8 = mysqli_query($mysql, "SELECT * FROM G WHERE ID_8='$id'");
+        $queryresult_G = ($queryG_8 == false) ? false : mysqli_fetch_array($queryG_8);
     }
     if (!$queryresult_G){
-        $queryG_9 = "SELECT * FROM G WHERE ID_9='$id'";
-        $queryresult_G = mysql_fetch_array(mysql_query($queryG_9));
+        $queryG_9 = mysqli_query($mysql, "SELECT * FROM G WHERE ID_9='$id'");
+        $queryresult_G = ($queryG_9 == false) ? false : mysqli_fetch_array($queryG_9);
     }
     if (!$queryresult_G){
-        $queryG_10 = "SELECT * FROM G WHERE ID_10='$id'";
-        $queryresult_G = mysql_fetch_array(mysql_query($queryG_10));
+        $queryG_10 = mysqli_query($mysql, "SELECT * FROM G WHERE ID_10='$id'");
+        $queryresult_G = ($queryG_10 == false) ? false : mysqli_fetch_array($queryG_10);
     }
     if (!$queryresult_G){
-        $queryG_11 = "SELECT * FROM G WHERE ID_11='$id'";
-        $queryresult_G = mysql_fetch_array(mysql_query($queryG_11));
+        $queryG_11 = mysqli_query($mysql, "SELECT * FROM G WHERE ID_11='$id'");
+        $queryresult_G = ($queryG_11 == false) ? false : mysqli_fetch_array($queryG_11);
     }
     if (!$queryresult_G){
-        $queryG_12 = "SELECT * FROM G WHERE ID_12='$id'";
-        $queryresult_G = mysql_fetch_array(mysql_query($queryG_12));
+        $queryG_12 = mysqli_query($mysql, "SELECT * FROM G WHERE ID_12='$id'");
+        $queryresult_G = ($queryG_12 == false) ? false : mysqli_fetch_array($queryG_12);
     }
     if ($queryresult_MS){
         $num_1 = '男單'.$queryresult_MS['NUM'];
@@ -294,8 +294,8 @@ function search2($type, $num) {
     $type = safe($type);
     $num = safe($num);
     if ($type == 'MS'){
-        $queryMS = "SELECT * FROM MS WHERE NUM='$num'";
-        $queryresult_MS = mysqli_fetch_array(mysqli_query($mysql, $queryMS));
+        $queryMS = mysqli_query($mysql, "SELECT * FROM MS WHERE NUM='$num'");
+        $queryresult_MS = ($queryMS == false) ? false : mysqli_fetch_array($queryMS);
         if ($queryresult_MS){
             $num_1 = '男單'.$queryresult_MS['NUM'];
             $grade_1 = $queryresult_MS['MAJOR'].translate_grade($queryresult_MS['GRADE']);
@@ -509,7 +509,10 @@ function check_id_G($id) {
 }
 
 function check_birth($birthy, $birthm, $birthd) {
-    if (!checkdate($birthm, $birthd, $birthy) || date('Y') - $birthy < 15 || date('Y') - $birthy > 65) return '請輸入正確的出生日期！';
+    if (!preg_match('/^[0-9]{4}/', $birthy)) return '請輸入正確的出生日期！';
+    elseif (!preg_match('/^[1-12]{2}/', $birthm)) return '請輸入正確的出生日期！';
+    elseif (!preg_match('/^[1-31]{2}/', $birthd)) return '請輸入正確的出生日期！';
+    elseif (!checkdate($birthm, $birthd, $birthy) || date('Y') - $birthy < 15 || date('Y') - $birthy > 65) return '請輸入正確的出生日期！';
     else return 'ok';
 }
 

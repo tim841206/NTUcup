@@ -79,7 +79,7 @@ CREATE TABLE `setup` (
   `XD_NUM` smallint(6) NOT NULL,
   `G_NUM` smallint(6) NOT NULL,
   `MEMBER` tinyint(1) NOT NULL DEFAULT '0',
-  `SIGNUP` tinyint(1) NOT NULL DEFAULT '1',
+  `SIGNUP` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='設定檔';
 
 --

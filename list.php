@@ -25,37 +25,22 @@ function translate_paystat($paystat) {
     elseif ($paystat == 1) return '已繳費';
 }
 
-$db = mysql_connect('localhost', 'root', '');
-mysql_query("SET NAMES 'utf8'");
-mysql_select_db('NTUcup', $db);
-$queryMS = mysql_query("SELECT * FROM MS");
-$numMS = mysql_num_rows($queryMS);
-$queryWS = mysql_query("SELECT * FROM WS");
-$numWS = mysql_num_rows($queryWS);
-$queryMD = mysql_query("SELECT * FROM MD");
-$numMD = mysql_num_rows($queryMD);
-$queryWD = mysql_query("SELECT * FROM WD");
-$numWD = mysql_num_rows($queryWD);
-$queryXD = mysql_query("SELECT * FROM XD");
-$numXD = mysql_num_rows($queryXD);
-$queryG = mysql_query("SELECT * FROM G");
-$numG = mysql_num_rows($queryG);
+$mysql = mysqli_connect('localhost', 'root', '');
+mysqli_query($mysql, "SET NAMES 'utf8'");
+mysqli_select_db($mysql, 'NTUcup');
+$queryMS = mysqli_query($mysql, "SELECT * FROM MS");
+$numMS = ($queryMS == false) ? 0 : mysqli_num_rows($queryMS);
+$queryWS = mysqli_query($mysql, "SELECT * FROM WS");
+$numWS = ($queryWS == false) ? 0 : mysqli_num_rows($queryWS);
+$queryMD = mysqli_query($mysql, "SELECT * FROM MD");
+$numMD = ($queryMD == false) ? 0 : mysqli_num_rows($queryMD);
+$queryWD = mysqli_query($mysql, "SELECT * FROM WD");
+$numWD = ($queryWD == false) ? 0 : mysqli_num_rows($queryWD);
+$queryXD = mysqli_query($mysql, "SELECT * FROM XD");
+$numXD = ($queryXD == false) ? 0 : mysqli_num_rows($queryXD);
+$queryG = mysqli_query($mysql, "SELECT * FROM G");
+$numG = ($queryG == false) ? 0 : mysqli_num_rows($queryG);
 ?>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="icon.png">
-    <meta name="description" content="國立臺灣大學台大盃羽球賽報名系統">
-    <meta name="author" content="國立臺灣大學羽球校隊">
-    <title>國立臺灣大學台大盃羽球賽</title>
-    <link href="custom.css" rel="stylesheet">
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
     <header>
         <div class="container">
             <h1 class="center">國立臺灣大學台大盃羽球賽報名系統</h1>
@@ -64,7 +49,7 @@ $numG = mysql_num_rows($queryG);
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-sm-offset-1 center">
+            <div class="col-sm-5 col-sm-offset-1 center">
                 <h3>查看報名名單</h3><br>
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
@@ -201,17 +186,17 @@ $numG = mysql_num_rows($queryG);
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 center">
+            <div class="col-sm-5 center">
                 <h3>查看繳費狀態</h3><br>
                 <h4>請輸入學生證號碼或項目及編號</h4>
                 <p>學生證號碼：<input type="text" id="id"><button onclick="search1()">查詢</button></p>
                 <p>項目：<select id="type">
-                        <option value="A">男單</option>
-                        <option value="B">女單</option>
-                        <option value="C">男雙</option>
-                        <option value="D">女雙</option>
-                        <option value="E">混雙</option>
-                        <option value="F">團體</option></select>
+                        <option value="MS">男單</option>
+                        <option value="WS">女單</option>
+                        <option value="MD">男雙</option>
+                        <option value="WD">女雙</option>
+                        <option value="XD">混雙</option>
+                        <option value="G">團體</option></select>
                 編號：<input type="text" id="num"><button onclick="search2()">查詢</button></p>
                 <h4>查詢結果</h4>
                 <div class="row">
@@ -268,6 +253,12 @@ $numG = mysql_num_rows($queryG);
                         document.getElementById("grade_2").innerHTML = data.grade_2;
                         document.getElementById("name_2").innerHTML = data.name_2;
                         document.getElementById("paystat_2").innerHTML = data.paystat_2;
+                    }
+                    if (data.num_3) {
+                        document.getElementById("num_3").innerHTML = data.num_3;
+                        document.getElementById("grade_3").innerHTML = data.grade_3;
+                        document.getElementById("name_3").innerHTML = data.name_3;
+                        document.getElementById("paystat_3").innerHTML = data.paystat_3;
                     }
                     if (data.null) {
                         alert("查無資料");
