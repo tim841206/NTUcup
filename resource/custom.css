@@ -41,8 +41,12 @@
 	text-align: center;
 }
 
+.smaller_box {
+    width: 50px;
+}
+
 .smallest_box {
-	width: 35px;
+	width: 30px;
 }
 
 .small_pic {

@@ -1,4 +1,8 @@
 <?php
+$mysql = mysqli_connect('localhost', 'root', '');
+mysqli_query($mysql, "SET NAMES 'utf8'");
+mysqli_select_db($mysql, 'NTUcup');
+
 function translate_grade($grade) {
     if ($grade == 'B1') return '大一';
     elseif ($grade == 'B2') return '大二';
@@ -25,9 +29,6 @@ function translate_paystat($paystat) {
     elseif ($paystat == 1) return '已繳費';
 }
 
-$mysql = mysqli_connect('localhost', 'root', '');
-mysqli_query($mysql, "SET NAMES 'utf8'");
-mysqli_select_db($mysql, 'NTUcup');
 $queryMS = mysqli_query($mysql, "SELECT * FROM MS");
 $numMS = ($queryMS == false) ? 0 : mysqli_num_rows($queryMS);
 $queryWS = mysqli_query($mysql, "SELECT * FROM WS");
