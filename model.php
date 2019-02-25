@@ -468,6 +468,9 @@ function check_id_G($id) {
         return '請輸入正確的學號！';
     }
     else {
+        $mysql = mysqli_connect('localhost', 'root', '');
+        mysqli_query($mysql, "SET NAMES 'utf8'");
+        mysqli_select_db($mysql, 'NTUcup');
         $queryID_G1 = "SELECT * FROM G WHERE ID_1='$id'";
         $queryresult_G = mysqli_fetch_row(mysqli_query($mysql, $queryID_G1));
         if ($queryresult_G) return '您已經報名過此項目！';
@@ -957,23 +960,63 @@ function signup($post) {
             $Wcount += 1;
             if (check_identityF($IDENTITY8) != 'ok') return check_identityF($IDENTITY8);
         }
-        $birth = explode('-', $BIRTH1);
-        if (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') return check_birth($birth[1], $birth[2], $birth[3]);
-        $birth = explode('-', $BIRTH2);
-        if (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') return check_birth($birth[1], $birth[2], $birth[3]);
-        $birth = explode('-', $BIRTH3);
-        if (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') return check_birth($birth[1], $birth[2], $birth[3]);
-        $birth = explode('-', $BIRTH4);
-        if (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') return check_birth($birth[1], $birth[2], $birth[3]);
-        $birth = explode('-', $BIRTH5);
-        if (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') return check_birth($birth[1], $birth[2], $birth[3]);
-        $birth = explode('-', $BIRTH6);
-        if (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') return check_birth($birth[1], $birth[2], $birth[3]);
-        $birth = explode('-', $BIRTH7);
-        if (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') return check_birth($birth[1], $birth[2], $birth[3]);
-        $birth = explode('-', $BIRTH8);
-        if (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') return check_birth($birth[1], $birth[2], $birth[3]);
 
+        $birth = explode('-', $BIRTH1);
+        if (count($birth) != 3) {
+            return '請輸入正確的出生日期！';
+        }
+        elseif (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') {
+            return check_birth($birth[0], $birth[1], $birth[2]);
+        }
+        $birth = explode('-', $BIRTH2);
+        if (count($birth) != 3) {
+            return '請輸入正確的出生日期！';
+        }
+        elseif (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') {
+            return check_birth($birth[0], $birth[1], $birth[2]);
+        }
+        $birth = explode('-', $BIRTH3);
+        if (count($birth) != 3) {
+            return '請輸入正確的出生日期！';
+        }
+        elseif (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') {
+            return check_birth($birth[0], $birth[1], $birth[2]);
+        }
+        $birth = explode('-', $BIRTH4);
+        if (count($birth) != 3) {
+            return '請輸入正確的出生日期！';
+        }
+        elseif (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') {
+            return check_birth($birth[0], $birth[1], $birth[2]);
+        }
+        $birth = explode('-', $BIRTH5);
+        if (count($birth) != 3) {
+            return '請輸入正確的出生日期！';
+        }
+        elseif (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') {
+            return check_birth($birth[0], $birth[1], $birth[2]);
+        }
+        $birth = explode('-', $BIRTH6);
+        if (count($birth) != 3) {
+            return '請輸入正確的出生日期！';
+        }
+        elseif (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') {
+            return check_birth($birth[0], $birth[1], $birth[2]);
+        }
+        $birth = explode('-', $BIRTH7);
+        if (count($birth) != 3) {
+            return '請輸入正確的出生日期！';
+        }
+        elseif (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') {
+            return check_birth($birth[0], $birth[1], $birth[2]);
+        }
+        $birth = explode('-', $BIRTH8);
+        if (count($birth) != 3) {
+            return '請輸入正確的出生日期！';
+        }
+        elseif (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') {
+            return check_birth($birth[0], $birth[1], $birth[2]);
+        }
 
         if (!empty($ID9)){
             if (check_id_G($ID9) != 'ok') return check_id_G($ID9);
@@ -989,8 +1032,12 @@ function signup($post) {
                 if (check_identityF($IDENTITY9) != 'ok') return check_identityF($IDENTITY9);
             }
             $birth = explode('-', $BIRTH9);
-            if (check_birth($birth[0], $birth[1], $birth[2]) != 'ok')
-                return check_birth($birth[1], $birth[2], $birth[3]);
+            if (count($birth) != 3) {
+                return '請輸入正確的出生日期！';
+            }
+            elseif (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') {
+                return check_birth($birth[0], $birth[1], $birth[2]);
+            }
         }
         if (!empty($ID10)){
             if (check_id_G($ID10) != 'ok') return check_id_G($ID10);
@@ -1006,8 +1053,12 @@ function signup($post) {
                 if (check_identityF($IDENTITY10) != 'ok') return check_identityF($IDENTITY10);
             }
             $birth = explode('-', $BIRTH10);
-            if (check_birth($birth[0], $birth[1], $birth[2]) != 'ok')
-                return check_birth($birth[1], $birth[2], $birth[3]);
+            if (count($birth) != 3) {
+                return '請輸入正確的出生日期！';
+            }
+            elseif (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') {
+                return check_birth($birth[0], $birth[1], $birth[2]);
+            }
         }
         if (!empty($ID11)){
             if (check_id_G($ID11) != 'ok') return check_id_G($ID11);
@@ -1023,8 +1074,12 @@ function signup($post) {
                 if (check_identityF($IDENTITY11) != 'ok') return check_identityF($IDENTITY11);
             }
             $birth = explode('-', $BIRTH11);
-            if (check_birth($birth[0], $birth[1], $birth[2]) != 'ok')
-                return check_birth($birth[1], $birth[2], $birth[3]);
+            if (count($birth) != 3) {
+                return '請輸入正確的出生日期！';
+            }
+            elseif (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') {
+                return check_birth($birth[0], $birth[1], $birth[2]);
+            }
         }
         if (!empty($ID12)){
             if (check_id_G($ID12) != 'ok') return check_id_G($ID12);
@@ -1040,8 +1095,12 @@ function signup($post) {
                 if (check_identityF($IDENTITY12) != 'ok') return check_identityF($IDENTITY12);
             }
             $birth = explode('-', $BIRTH12);
-            if (check_birth($birth[0], $birth[1], $birth[2]) != 'ok')
-                return check_birth($birth[1], $birth[2], $birth[3]);
+            if (count($birth) != 3) {
+                return '請輸入正確的出生日期！';
+            }
+            elseif (check_birth($birth[0], $birth[1], $birth[2]) != 'ok') {
+                return check_birth($birth[0], $birth[1], $birth[2]);
+            }
         }
         if ($Mcount < 4){
             return "每隊至少需要有四位男生";
@@ -1061,7 +1120,7 @@ function signup($post) {
         if (!empty($PHONE10) && check_phone($PHONE10) != 'ok') return check_phone($PHONE10);
         if (!empty($PHONE11) && check_phone($PHONE11) != 'ok') return check_phone($PHONE11);
         if (!empty($PHONE12) && check_phone($PHONE12) != 'ok') return check_phone($PHONE12);
-        if (check_check() != 'ok') return check_check();
+        if (check_check($post) != 'ok') return check_check($post);
 
         date_default_timezone_set('Asia/Taipei');
         $SIGN_TIME = date("Y-m-d H:i:s");
