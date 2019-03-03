@@ -661,9 +661,9 @@ function check_Gname($Gmajor, $Gname) {
         $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
         mysqli_query($mysql, "SET NAMES 'utf8'");
         mysqli_select_db($mysql, 'NTUcup');
-        $query_G = "SELECT * FROM G WHERE Gmajor='$Gmajor' AND Gname='$Gname'";
+        $query_G = "SELECT Gmajor FROM G WHERE Gmajor='$Gmajor' AND Gname='$Gname'";
         $queryresult_G = mysqli_fetch_row(mysqli_query($mysql, $query_G));
-        if ($queryresult_G != false) return '此隊別已經報名，請選擇其它隊別！'
+        if ($queryresult_G[0] == $Gmajor) return '此隊別已經報名，請選擇其它隊別！';
         else return 'ok';
     }
 }
