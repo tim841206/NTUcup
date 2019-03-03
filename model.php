@@ -1,4 +1,7 @@
 <?php
+$mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
+mysqli_query($mysql, "SET NAMES 'utf8'");
+mysqli_select_db($mysql, 'NTUcup');
 if ($_POST['service'] == "signup") {
     if (in_array($_POST['type'], array("MS", "WS", "MD", "WD", "XD", "G"))) {
         echo json_encode(signup($_POST));
@@ -61,9 +64,7 @@ function fulltohalf($str) {
 }
 
 function search1($id) {
-    $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
-    mysqli_query($mysql, "SET NAMES 'utf8'");
-    mysqli_select_db($mysql, 'NTUcup');
+    $mysql = $GLOBALS['mysql'];
     $count = 1;
     $id = strtoupper(safe($id));
     $queryMS = mysqli_query($mysql, "SELECT * FROM MS WHERE ID='$id'");
@@ -288,9 +289,7 @@ function search1($id) {
 }
 
 function search2($type, $num) {
-    $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
-    mysqli_query($mysql, "SET NAMES 'utf8'");
-    mysqli_select_db($mysql, 'NTUcup');
+    $mysql = $GLOBALS['mysql'];
     $type = safe($type);
     $num = safe($num);
     if ($type == 'MS'){
@@ -383,9 +382,7 @@ function search2($type, $num) {
 }
 
 function delete($type, $num) {
-    $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
-    mysqli_query($mysql, "SET NAMES 'utf8'");
-    mysqli_select_db($mysql, 'NTUcup');
+    $mysql = $GLOBALS['mysql'];
     $sql = "DELETE FROM $type WHERE NUM='$num'";
     if (mysqli_query($mysql, $sql)) {
         return 'ok';
@@ -401,9 +398,7 @@ function check_id($type, $id) {
         return '請輸入正確的學號！';
     }
     else {
-        $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
-        mysqli_query($mysql, "SET NAMES 'utf8'");
-        mysqli_select_db($mysql, 'NTUcup');
+        $mysql = $GLOBALS['mysql'];
         $queryID_MS = "SELECT ID FROM MS WHERE ID='$id'";
         $queryresult_MS = mysqli_num_rows(mysqli_query($mysql, $queryID_MS));
         $queryID_WS = "SELECT ID FROM WS WHERE ID='$id'";
@@ -468,9 +463,7 @@ function check_id_G($id) {
         return '請輸入正確的學號！';
     }
     else {
-        $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
-        mysqli_query($mysql, "SET NAMES 'utf8'");
-        mysqli_select_db($mysql, 'NTUcup');
+        $mysql = $GLOBALS['mysql'];
         $queryID_G1 = "SELECT * FROM G WHERE ID_1='$id'";
         $queryresult_G = mysqli_fetch_row(mysqli_query($mysql, $queryID_G1));
         if ($queryresult_G) return '您已經報名過此項目！';
@@ -658,9 +651,7 @@ function check_Gname($Gmajor, $Gname) {
     if (empty($Gname)) return '請選擇您的隊伍隊名！';
     elseif (!in_array($Gname, array("隊", "A", "B", "C"))) return '請正確選擇您的隊伍隊名！';
     else {
-        $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
-        mysqli_query($mysql, "SET NAMES 'utf8'");
-        mysqli_select_db($mysql, 'NTUcup');
+        $mysql = $GLOBALS['mysql'];
         $query_G = "SELECT Gmajor FROM G WHERE Gmajor='$Gmajor' AND Gname='$Gname'";
         $queryresult_G = mysqli_fetch_row(mysqli_query($mysql, $query_G));
         if ($queryresult_G[0] == $Gmajor) return '此隊別已經報名，請選擇其它隊別！';
@@ -669,9 +660,7 @@ function check_Gname($Gmajor, $Gname) {
 }
 
 function signup($post) {
-    $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
-    mysqli_query($mysql, "SET NAMES 'utf8'");
-    mysqli_select_db($mysql, 'NTUcup');
+    $mysql = $GLOBALS['mysql'];
     if (in_array($post['type'], array("MS", "WS"))) {
         $ID = strtoupper($post['id']);
         $NAME = $post['name'];
@@ -1150,9 +1139,7 @@ function signup($post) {
 }
 
 function signupDirect($post) {
-    $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
-    mysqli_query($mysql, "SET NAMES 'utf8'");
-    mysqli_select_db($mysql, 'NTUcup');
+    $mysql = $GLOBALS['mysql'];
     if (in_array($post['type'], array("directMS", "directWS"))) {
         $ID = strtoupper($post['id']);
         $NAME = $post['name'];
