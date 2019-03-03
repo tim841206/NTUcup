@@ -61,7 +61,7 @@ function fulltohalf($str) {
 }
 
 function search1($id) {
-    $mysql = mysqli_connect('localhost', 'root', '');
+    $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
     mysqli_query($mysql, "SET NAMES 'utf8'");
     mysqli_select_db($mysql, 'NTUcup');
     $count = 1;
@@ -288,7 +288,7 @@ function search1($id) {
 }
 
 function search2($type, $num) {
-    $mysql = mysqli_connect('localhost', 'root', '');
+    $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
     mysqli_query($mysql, "SET NAMES 'utf8'");
     mysqli_select_db($mysql, 'NTUcup');
     $type = safe($type);
@@ -383,7 +383,7 @@ function search2($type, $num) {
 }
 
 function delete($type, $num) {
-    $mysql = mysqli_connect('localhost', 'root', '');
+    $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
     mysqli_query($mysql, "SET NAMES 'utf8'");
     mysqli_select_db($mysql, 'NTUcup');
     $sql = "DELETE FROM $type WHERE NUM='$num'";
@@ -401,7 +401,7 @@ function check_id($type, $id) {
         return '請輸入正確的學號！';
     }
     else {
-        $mysql = mysqli_connect('localhost', 'root', '');
+        $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
         mysqli_query($mysql, "SET NAMES 'utf8'");
         mysqli_select_db($mysql, 'NTUcup');
         $queryID_MS = "SELECT ID FROM MS WHERE ID='$id'";
@@ -468,7 +468,7 @@ function check_id_G($id) {
         return '請輸入正確的學號！';
     }
     else {
-        $mysql = mysqli_connect('localhost', 'root', '');
+        $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
         mysqli_query($mysql, "SET NAMES 'utf8'");
         mysqli_select_db($mysql, 'NTUcup');
         $queryID_G1 = "SELECT * FROM G WHERE ID_1='$id'";
@@ -654,13 +654,22 @@ function check_Gmajor($Gmajor) {
     else return 'ok';
 }
 
-function check_Gname($Gname) {
+function check_Gname($Gmajor, $Gname) {
     if (empty($Gname)) return '請選擇您的隊伍隊名！';
-    else return 'ok';
+    elseif (!in_array($Gname, array("隊", "A", "B", "C"))) return '請正確選擇您的隊伍隊名！';
+    else {
+        $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
+        mysqli_query($mysql, "SET NAMES 'utf8'");
+        mysqli_select_db($mysql, 'NTUcup');
+        $query_G = "SELECT * FROM G WHERE Gmajor='$Gmajor' AND Gname='$Gname'";
+        $queryresult_G = mysqli_fetch_row(mysqli_query($mysql, $query_G));
+        if ($queryresult_G != false) return '此隊別已經報名，請選擇其它隊別！'
+        else return 'ok';
+    }
 }
 
 function signup($post) {
-    $mysql = mysqli_connect('localhost', 'root', '');
+    $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
     mysqli_query($mysql, "SET NAMES 'utf8'");
     mysqli_select_db($mysql, 'NTUcup');
     if (in_array($post['type'], array("MS", "WS"))) {
@@ -834,8 +843,8 @@ function signup($post) {
         $SEX3 = safe($post['sex3']);     $SEX4 = safe($post['sex4']);
         $SEX5 = safe($post['sex5']);     $SEX6 = safe($post['sex6']);
         $SEX7 = safe($post['sex7']);     $SEX8 = safe($post['sex8']);
-        $SEX9 = safe($post['sex9']);     $SEX10 = $post['sex10'];
-        $SEX11 = $post['sex11'];   $SEX12 = $post['sex12'];
+        $SEX9 = safe($post['sex9']);     $SEX10 = safe($post['sex10']);
+        $SEX11 = safe($post['sex11']);   $SEX12 = safe($post['sex12']);
         $BIRTH1 = safe($post['birth1']);     $BIRTH2 = safe($post['birth2']);
         $BIRTH3 = safe($post['birth3']);     $BIRTH4 = safe($post['birth4']);
         $BIRTH5 = safe($post['birth5']);     $BIRTH6 = safe($post['birth6']);
@@ -861,7 +870,7 @@ function signup($post) {
         $IDENTITY11 = strtoupper(safe($post['identity11']));
         $IDENTITY12 = strtoupper(safe($post['identity12']));
         if (check_Gmajor($Gmajor) != 'ok') return check_Gmajor($Gmajor);
-        if (check_Gname($Gname) != 'ok') return check_Gname($Gname);
+        if (check_Gname($Gmajor, $Gname) != 'ok') return check_Gname($Gmajor, $Gname);
         if (check_id_G($ID1) != 'ok') return check_id_G($ID1);
         if (check_id_G($ID2) != 'ok') return check_id_G($ID2);
         if (check_id_G($ID3) != 'ok') return check_id_G($ID3);
@@ -1141,7 +1150,7 @@ function signup($post) {
 }
 
 function signupDirect($post) {
-    $mysql = mysqli_connect('localhost', 'root', '');
+    $mysql = mysqli_connect('localhost', 'NTUcup', '0986036999');
     mysqli_query($mysql, "SET NAMES 'utf8'");
     mysqli_select_db($mysql, 'NTUcup');
     if (in_array($post['type'], array("directMS", "directWS"))) {
