@@ -416,35 +416,35 @@ function check_id($type, $id) {
         $queryID_XD_2 = "SELECT ID_2 FROM XD WHERE ID_2='$id'";
         $queryresult_XD_2 = mysqli_num_rows(mysqli_query($mysql, $queryID_XD_2));
         $count = $queryresult_MS + $queryresult_WS + $queryresult_MD_1 + $queryresult_MD_2 + $queryresult_WD_1 + $queryresult_WD_2 + $queryresult_XD_1 + $queryresult_XD_2;
-        if ($type == 'MS') {
+        if ($type == 'MS' || $type == 'directMS') {
             if ($queryresult_MS) return '您已經報名過此項目！';
             else {
                 if ($count >= 2) return '您已經報名兩個項目！';
                 else return 'ok';
             }
         }
-        elseif ($type == 'WS') {
+        elseif ($type == 'WS' || $type == 'directWS') {
             if ($queryresult_WS) return '您已經報名過此項目！';
             else {
                 if ($count >= 2) return '您已經報名兩個項目！';
                 else return 'ok';
             }
         }
-        elseif ($type == 'MD') {
+        elseif ($type == 'MD' || $type == 'directMD') {
             if ($queryresult_MD_1 || $queryresult_MD_2) return '您已經報名過此項目！';
             else {
                 if ($count == 2) return '您已經報名兩個項目！';
                 else return 'ok';
             }
         }
-        elseif ($type == 'WD') {
+        elseif ($type == 'WD' || $type == 'directWD') {
             if ($queryresult_WD_1 || $queryresult_WD_2) return '您已經報名過此項目！';
             else {
                 if ($count == 2) return '您已經報名兩個項目！';
                 else return 'ok';
             }
         }
-        elseif ($type == 'XD') {
+        elseif ($type == 'XD' || $type == 'directXD') {
             if ($queryresult_XD_1 || $queryresult_XD_2) return '您已經報名過此項目！';
             else {
                 if ($count >= 2) return '您已經報名兩個項目！';
