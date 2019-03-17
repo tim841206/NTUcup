@@ -661,7 +661,7 @@ function check_Gname($Gmajor, $Gname) {
 
 function addToList($type, $content) {
     $file = fopen("resource/backup/".$type.".txt","a+");
-    fwrite($file, $content.PHP_EOL);
+    fwrite($file, PHP_EOL.$content);
     fclose($file);
 }
 
@@ -1141,7 +1141,7 @@ function signup($post) {
         $insert_G = "INSERT INTO G (NUM, Gmajor, Gname, ID_1, ID_2, ID_3, ID_4, ID_5, ID_6, ID_7, ID_8, ID_9, ID_10, ID_11, ID_12, NAME_1, NAME_2, NAME_3, NAME_4, NAME_5, NAME_6, NAME_7, NAME_8, NAME_9, NAME_10, NAME_11, NAME_12, MAJOR_1, MAJOR_2, MAJOR_3, MAJOR_4, MAJOR_5, MAJOR_6, MAJOR_7, MAJOR_8, MAJOR_9, MAJOR_10, MAJOR_11, MAJOR_12, GRADE_1, GRADE_2, GRADE_3, GRADE_4, GRADE_5, GRADE_6, GRADE_7, GRADE_8, GRADE_9, GRADE_10, GRADE_11, GRADE_12, PHONE_1, PHONE_2, PHONE_3, PHONE_4, PHONE_5, PHONE_6, PHONE_7, PHONE_8, PHONE_9, PHONE_10, PHONE_11, PHONE_12, BIRTH_1, BIRTH_2, BIRTH_3, BIRTH_4, BIRTH_5, BIRTH_6, BIRTH_7, BIRTH_8, BIRTH_9, BIRTH_10, BIRTH_11, BIRTH_12, IDENTITY_1, IDENTITY_2, IDENTITY_3, IDENTITY_4, IDENTITY_5, IDENTITY_6, IDENTITY_7, IDENTITY_8, IDENTITY_9, IDENTITY_10, IDENTITY_11, IDENTITY_12, SIGN_TIME, PAYSTAT) VALUES ('$NUM', '$Gmajor', '$Gname', '$ID1', '$ID2', '$ID3', '$ID4', '$ID5', '$ID6', '$ID7', '$ID8', '$ID9', '$ID10', '$ID11', '$ID12', '$NAME1', '$NAME2', '$NAME3', '$NAME4', '$NAME5', '$NAME6', '$NAME7', '$NAME8', '$NAME9', '$NAME10', '$NAME11', '$NAME12', '$MAJOR1', '$MAJOR2', '$MAJOR3', '$MAJOR4', '$MAJOR5', '$MAJOR6', '$MAJOR7', '$MAJOR8', '$MAJOR9', '$MAJOR10', '$MAJOR11', '$MAJOR12', '$GRADE1', '$GRADE2', '$GRADE3', '$GRADE4', '$GRADE5', '$GRADE6', '$GRADE7', '$GRADE8', '$GRADE9', '$GRADE10', '$GRADE11', '$GRADE12', '$PHONE1', '$PHONE2', '$PHONE3', '$PHONE4', '$PHONE5', '$PHONE6', '$PHONE7', '$PHONE8', '$PHONE9', '$PHONE10', '$PHONE11', '$PHONE12', '$BIRTH1', '$BIRTH2', '$BIRTH3', '$BIRTH4', '$BIRTH5', '$BIRTH6', '$BIRTH7', '$BIRTH8', '$BIRTH9', '$BIRTH10', '$BIRTH11', '$BIRTH12', '$IDENTITY1', '$IDENTITY2', '$IDENTITY3', '$IDENTITY4', '$IDENTITY5', '$IDENTITY6', '$IDENTITY7', '$IDENTITY8', '$IDENTITY9', '$IDENTITY10', '$IDENTITY11', '$IDENTITY12', '$SIGN_TIME', 0)";
         $update_G_NUM = "UPDATE setup SET G_NUM = $NUM+1";
         if (mysqli_query($mysql, $insert_G) && mysqli_query($mysql, $update_G_NUM)){
-        	addToList("G", $NUM.", ".$Gmajor.", ".$Gname.", ".$SIGN_TIME."<br>".
+        	addToList("G", $NUM.", ".$Gmajor.", ".$Gname.", ".$SIGN_TIME.PHP_EOL.
         		$ID1.", ".$NAME1.", ".$MAJOR1.", ".$GRADE1.", ".$PHONE1.", ".$BIRTH1.", ".$IDENTITY1.PHP_EOL.
         		$ID2.", ".$NAME2.", ".$MAJOR2.", ".$GRADE2.", ".$PHONE2.", ".$BIRTH2.", ".$IDENTITY2.PHP_EOL.
         		$ID3.", ".$NAME3.", ".$MAJOR3.", ".$GRADE3.", ".$PHONE3.", ".$BIRTH3.", ".$IDENTITY3.PHP_EOL.

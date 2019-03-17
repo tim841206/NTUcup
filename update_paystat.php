@@ -171,12 +171,12 @@ $numG = ($queryG == false) ? 0 : mysqli_num_rows($queryG);
                             <div class="panel-body">
                                 <table border="2" width="100%">
                                     <?php
-                                    if (!$queryXD) {
+                                    if (!$queryG) {
                                         echo "目前尚無選手報名";
                                     }
                                     else {
                                         echo "<tr><th>編號</th><th>系所</th><th>隊名</th><th>繳費</th></tr>";
-                                        while ($result = mysqli_fetch_array($queryXD)){
+                                        while ($result = mysqli_fetch_array($queryG)){
                                             echo '<tr><td>'.$result['NUM'].'</td><td>'.$result['Gmajor'].'</td><td>'.$result['Gname'].'</td><td><input type="checkbox" name="G[]" value="'.$result['NUM'].'"'.check_paystat($result['PAYSTAT']).'></td></tr>';
                                         }
                                     }
