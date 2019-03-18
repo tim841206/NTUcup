@@ -660,7 +660,7 @@ function check_Gname($Gmajor, $Gname) {
 }
 
 function addToList($type, $content) {
-    $file = fopen("resource/backup/".$type.".txt","a+");
+    $file = fopen("resource/backup/".$type.".php","a+");
     fwrite($file, PHP_EOL.$content);
     fclose($file);
 }
