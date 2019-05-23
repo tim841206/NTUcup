@@ -1,6 +1,5 @@
 <?php
 include_once("custom.php");
-include_once("database.php");
 include_once("TCPDF/tcpdf.php");
 
 $account = $_GET['account'];
