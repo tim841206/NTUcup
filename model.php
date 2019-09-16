@@ -1169,7 +1169,6 @@ function signupDirect($post) {
         $BIRTHM = $post['birthm'];
         $BIRTHD = $post['birthd'];
         $IDENTITY = strtoupper($post['identity']);
-        if (check_id($post['type'], $ID) != 'ok') return check_id($post['type'], $ID);
         $BIRTH = $BIRTHY.'-'.$BIRTHM.'-'.$BIRTHD;
         date_default_timezone_set('Asia/Taipei');
         $SIGN_TIME = date("Y-m-d H:i:s");
@@ -1223,8 +1222,6 @@ function signupDirect($post) {
         $BIRTHD2 = $post['birthd2'];
         $IDENTITY1 = strtoupper($post['identity1']);
         $IDENTITY2 = strtoupper($post['identity2']);
-        if (check_id($post['type'], $ID1) != 'ok') return check_id($post['type'], $ID1);
-        if (check_id($post['type'], $ID2) != 'ok') return check_id($post['type'], $ID2);
         $BIRTH1 = $BIRTHY1.'-'.$BIRTHM1.'-'.$BIRTHD1;
         $BIRTH2 = $BIRTHY2.'-'.$BIRTHM2.'-'.$BIRTHD2;
         date_default_timezone_set('Asia/Taipei');
