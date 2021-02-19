@@ -60,7 +60,7 @@ function logout() {
 	}
 }
 
-function swap() {
+function swap(gameno) {
 	document.getElementById("cover").style.display = "block";
 	var above = [];
 	above[0] = 'skip';
