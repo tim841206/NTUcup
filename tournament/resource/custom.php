@@ -362,6 +362,10 @@ function cyclePublicContent($account, $gameno) {
 			if (empty($state['above'])) {
 				$content .= getTreeTable($i, 1, array(array_pop($up), ''), array('', ''));
 			}
+			elseif ($state['above'] == -1) {
+				$omit = array_pop($up);
+				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
+			}
 			else {
 				$omit = array_pop($up);
 				$query = queryContentSingle($account, $gameno, $state['above']);
@@ -370,6 +374,10 @@ function cyclePublicContent($account, $gameno) {
 			$i++;
 			if (empty($state['below'])) {
 				$content .= getTreeTable($i, 1, array(array_pop($up), ''), array('', ''));
+			}
+			elseif ($state['below'] == -1) {
+				$omit = array_pop($up);
+				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -381,6 +389,10 @@ function cyclePublicContent($account, $gameno) {
 			if (empty($state['above'])) {
 				$content .= getTreeTable($i, 1, array(array_pop($up), ''), array('', ''));
 			}
+			elseif ($state['above'] == -1){
+				$omit = array_pop($up);
+				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
+			}
 			else {
 				$omit = array_pop($up);
 				$query = queryContentDouble($account, $gameno, $state['above']);
@@ -389,6 +401,10 @@ function cyclePublicContent($account, $gameno) {
 			$i++;
 			if (empty($state['below'])) {
 				$content .= getTreeTable($i, 1, array(array_pop($up), ''), array('', ''));
+			}
+			elseif ($state['below'] == -1) {
+				$omit = array_pop($up);
+				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -400,6 +416,10 @@ function cyclePublicContent($account, $gameno) {
 			if (empty($state['above'])) {
 				$content .= getTreeTable($i, 3, array(array_pop($up)), array(''));
 			}
+			elseif ($state['above'] == -1) {
+				$omit = array_pop($up);
+				$content .= getTreeTable($i, 3, array('Bye', ''), array('', ''));
+			}
 			else {
 				$omit = array_pop($up);
 				$query = queryContentGroup($account, $gameno, $state['above']);
@@ -408,6 +428,10 @@ function cyclePublicContent($account, $gameno) {
 			$i++;
 			if (empty($state['below'])) {
 				$content .= getTreeTable($i, 3, array(array_pop($up)), array(''));
+			}
+			elseif ($state['below'] == -1) {
+				$omit = array_pop($up);
+				$content .= getTreeTable($i, 3, array('Bye', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -720,6 +744,10 @@ function cycleEditContent($account, $gameno) {
 			if (empty($state['above'])) {
 				$content .= getTreeTable($i, 1, array(array_pop($up), ''), array('', ''));
 			}
+			elseif ($state['above'] == -1) {
+				$omit = array_pop($up);
+				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
+			}
 			else {
 				$omit = array_pop($up);
 				$query = queryContentSingle($account, $gameno, $state['above']);
@@ -728,6 +756,10 @@ function cycleEditContent($account, $gameno) {
 			$i++;
 			if (empty($state['below'])) {
 				$content .= getTreeTable($i, 1, array(array_pop($up), ''), array('', ''));
+			}
+			elseif ($state['below'] == -1) {
+				$omit = array_pop($up);
+				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -739,6 +771,10 @@ function cycleEditContent($account, $gameno) {
 			if (empty($state['above'])) {
 				$content .= getTreeTable($i, 1, array(array_pop($up), ''), array('', ''));
 			}
+			elseif ($state['above'] == -1) {
+				$omit = array_pop($up);
+				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
+			}
 			else {
 				$omit = array_pop($up);
 				$query = queryContentDouble($account, $gameno, $state['above']);
@@ -747,6 +783,10 @@ function cycleEditContent($account, $gameno) {
 			$i++;
 			if (empty($state['below'])) {
 				$content .= getTreeTable($i, 1, array(array_pop($up), ''), array('', ''));
+			}
+			elseif ($state['below'] == -1) {
+				$omit = array_pop($up);
+				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -758,6 +798,10 @@ function cycleEditContent($account, $gameno) {
 			if (empty($state['above'])) {
 				$content .= getTreeTable($i, 2, array(array_pop($up)), array(''));
 			}
+			elseif ($state['above'] == -1) {
+				$omit = array_pop($up);
+				$content .= getTreeTable($i, 2, array('Bye'), array(''));
+			}
 			else {
 				$omit = array_pop($up);
 				$query = queryContentGroup($account, $gameno, $state['above']);
@@ -766,6 +810,10 @@ function cycleEditContent($account, $gameno) {
 			$i++;
 			if (empty($state['below'])) {
 				$content .= getTreeTable($i, 2, array(array_pop($up)), array(''));
+			}
+			elseif ($state['below'] == -1) {
+				$omit = array_pop($up);
+				$content .= getTreeTable($i, 2, array('Bye'), array(''));
 			}
 			else {
 				$omit = array_pop($up);
