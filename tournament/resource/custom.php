@@ -364,7 +364,7 @@ function cyclePublicContent($account, $gameno) {
 			}
 			elseif ($state['above'] == -1) {
 				$omit = array_pop($up);
-				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
+				$content .= getTreeTable($i, 1, array('W/O', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -377,7 +377,7 @@ function cyclePublicContent($account, $gameno) {
 			}
 			elseif ($state['below'] == -1) {
 				$omit = array_pop($up);
-				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
+				$content .= getTreeTable($i, 1, array('W/O', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -391,7 +391,7 @@ function cyclePublicContent($account, $gameno) {
 			}
 			elseif ($state['above'] == -1){
 				$omit = array_pop($up);
-				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
+				$content .= getTreeTable($i, 1, array('W/O', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -404,7 +404,7 @@ function cyclePublicContent($account, $gameno) {
 			}
 			elseif ($state['below'] == -1) {
 				$omit = array_pop($up);
-				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
+				$content .= getTreeTable($i, 1, array('W/O', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -418,7 +418,7 @@ function cyclePublicContent($account, $gameno) {
 			}
 			elseif ($state['above'] == -1) {
 				$omit = array_pop($up);
-				$content .= getTreeTable($i, 3, array('Bye', ''), array('', ''));
+				$content .= getTreeTable($i, 3, array('W/O', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -431,7 +431,7 @@ function cyclePublicContent($account, $gameno) {
 			}
 			elseif ($state['below'] == -1) {
 				$omit = array_pop($up);
-				$content .= getTreeTable($i, 3, array('Bye', ''), array('', ''));
+				$content .= getTreeTable($i, 3, array('W/O', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -746,7 +746,7 @@ function cycleEditContent($account, $gameno) {
 			}
 			elseif ($state['above'] == -1) {
 				$omit = array_pop($up);
-				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
+				$content .= getTreeTable($i, 1, array('W/O', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -759,7 +759,7 @@ function cycleEditContent($account, $gameno) {
 			}
 			elseif ($state['below'] == -1) {
 				$omit = array_pop($up);
-				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
+				$content .= getTreeTable($i, 1, array('W/O', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -773,7 +773,7 @@ function cycleEditContent($account, $gameno) {
 			}
 			elseif ($state['above'] == -1) {
 				$omit = array_pop($up);
-				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
+				$content .= getTreeTable($i, 1, array('W/O', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -786,7 +786,7 @@ function cycleEditContent($account, $gameno) {
 			}
 			elseif ($state['below'] == -1) {
 				$omit = array_pop($up);
-				$content .= getTreeTable($i, 1, array('Bye', ''), array('', ''));
+				$content .= getTreeTable($i, 1, array('W/O', ''), array('', ''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -800,7 +800,7 @@ function cycleEditContent($account, $gameno) {
 			}
 			elseif ($state['above'] == -1) {
 				$omit = array_pop($up);
-				$content .= getTreeTable($i, 2, array('Bye'), array(''));
+				$content .= getTreeTable($i, 2, array('W/O'), array(''));
 			}
 			else {
 				$omit = array_pop($up);
@@ -813,7 +813,7 @@ function cycleEditContent($account, $gameno) {
 			}
 			elseif ($state['below'] == -1) {
 				$omit = array_pop($up);
-				$content .= getTreeTable($i, 2, array('Bye'), array(''));
+				$content .= getTreeTable($i, 2, array('W/O'), array(''));
 			}
 			else {
 				$omit = array_pop($up);
