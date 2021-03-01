@@ -1554,6 +1554,7 @@ function selectCycleTrianglePlayer($account, $gameno, $game, $pos, $gap, $playty
 				if ($i == $j || $priority[$j] == -1) continue;
 
 				// Calculate priority and score = (Points WON) - (Points LOSE)
+				// We can calculate score first, since only when all are considered, we will be using it.
 				if ($i == 0 && $j == 1){
 					if ($game1['winner'] == $game1['above']){
 						$priority[$i] = $priority[$i] + 2;
@@ -1634,7 +1635,7 @@ function selectCycleTrianglePlayer($account, $gameno, $game, $pos, $gap, $playty
 				continue;
 			}
 			// (2-3) Three are selected
-			elseif (count($max_pos) == 3){
+			elseif (count($max_pos) == 3 && max($priority) != -1){
 				if ($playtype == 'C'){
 					// TODO: FOR TEAM GAME, NOT IMPLEMENT YET.
 				}
@@ -1659,6 +1660,9 @@ function selectCycleTrianglePlayer($account, $gameno, $game, $pos, $gap, $playty
 					$score[$select_pos] = -3000;
 					continue;
 				}
+			}
+			else{
+				break;
 			}
 		}
 
