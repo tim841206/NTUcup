@@ -31,15 +31,19 @@ for ($i = 1; $i < count($above); $i++) {
 	elseif ($temp_above == $temp_below && $temp_above == -1) {
 		mysqli_query($mysql, "UPDATE GAMESTATE SET ABOVESCORE='$temp_above', BELOWSCORE='$temp_below', WINNER='-1' WHERE USERNO='$account' AND GAMENO='$gameno' AND PLAYNO='$i'");
 	}
-	elseif ($temp_above == $temp_below && $temp_above == 0) {
-		srand($gap + $amount + $i);
+	// Deal with both of them are "Ask For Leave"
+	elseif ($temp_above == $temp_below && $temp_above == -2) {
+		srand($gap + $amount + 10 * $i);
 		if (rand() % 2 == 0){
-			mysqli_query($mysql, "UPDATE GAMESTATE SET ABOVESCORE='$temp_above', BELOWSCORE='$temp_below', WINNER=ABOVE WHERE USERNO='$account' AND GAMENO='$gameno' AND PLAYNO='$i'");
+			mysqli_query($mysql, "UPDATE GAMESTATE SET ABOVESCORE=0, BELOWSCORE=0, WINNER=ABOVE WHERE USERNO='$account' AND GAMENO='$gameno' AND PLAYNO='$i'");
 		}
 		else {
-			mysqli_query($mysql, "UPDATE GAMESTATE SET ABOVESCORE='$temp_above', BELOWSCORE='$temp_below', WINNER=BELOW WHERE USERNO='$account' AND GAMENO='$gameno' AND PLAYNO='$i'");
+			mysqli_query($mysql, "UPDATE GAMESTATE SET ABOVESCORE=0, BELOWSCORE=0, WINNER=BELOW WHERE USERNO='$account' AND GAMENO='$gameno' AND PLAYNO='$i'");
 		}
-		
+	}
+	// Reset the score as NULL
+	elseif ($temp_above == $temp_below && $temp_above == -10){
+			mysqli_query($mysql, "UPDATE GAMESTATE SET ABOVESCORE=NULL, BELOWSCORE=NULL, WINNER=NULL WHERE USERNO='$account' AND GAMENO='$gameno' AND PLAYNO='$i'");
 	}
 	if ($gametype == 'A' || $i > $gap) {
 		updateGameChart($account, $gameno);
