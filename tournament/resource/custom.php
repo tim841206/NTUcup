@@ -1727,100 +1727,15 @@ function updateCycleGameState($account, $gameno) {
 		$pos += 4;
 	}
 	for ($cycle = 1; $cycle <= $distribute['3_1']; $cycle++) {
-		$game1 = queryState($account, $gameno, $game);
-		$game2 = queryState($account, $gameno, $gap + $game);
-		$game3 = queryState($account, $gameno, 2*$gap + $game);
-		$priority = array(0,0,0);
-		if (!empty($game1['winner']) && !empty($game2['winner']) && !empty($game3['winner'])) {
-			$priority[0] += $game1['aboveScore'];
-			$priority[1] += $game1['belowScore'];
-			$priority[0] += $game2['aboveScore'];
-			$priority[2] += $game2['belowScore'];
-			$priority[1] += $game3['aboveScore'];
-			$priority[2] += $game3['belowScore'];
-			if ($game1['winner'] == $pos) $priority[0] += 1000;
-			elseif ($game1['winner'] == $pos+1) $priority[1] += 1000;
-			if ($game2['winner'] == $pos) $priority[0] += 1000;
-			elseif ($game2['winner'] == $pos+2) $priority[2] += 1000;
-			if ($game3['winner'] == $pos+1) $priority[1] += 1000;
-			elseif ($game3['winner'] == $pos+2) $priority[2] += 1000;
-			if (max($priority) == $priority[0]) {
-				array_push($rank2, $pos);
-			}
-			elseif (max($priority) == $priority[1]) {
-				array_push($rank2, $pos+1);
-			}
-			elseif (max($priority) == $priority[2]) {
-				array_push($rank2, $pos+2);
-			}
-		}
-		else {
-			array_push($rank2, NULL);
-		}
+		$select_order = selectCycleTrianglePlayer($account, $gameno, $game, $pos, $gap, $playtype, 1);
+		array_push($rank2, array_shift($select_order));
 		$game++;
 		$pos += 3;
 	}
 	for ($cycle = 1; $cycle <= $distribute['3_2']; $cycle++) {
-		$game1 = queryState($account, $gameno, $game);
-		$game2 = queryState($account, $gameno, $gap + $game);
-		$game3 = queryState($account, $gameno, 2*$gap + $game);
-		$priority = array(0,0,0);
-		if (!empty($game1['winner']) && !empty($game2['winner']) && !empty($game3['winner'])) {
-			$priority[0] += $game1['aboveScore'];
-			$priority[1] += $game1['belowScore'];
-			$priority[0] += $game2['aboveScore'];
-			$priority[2] += $game2['belowScore'];
-			$priority[1] += $game3['aboveScore'];
-			$priority[2] += $game3['belowScore'];
-			if ($game1['winner'] == $pos) $priority[0] += 1000;
-			elseif ($game1['winner'] == $pos+1) $priority[1] += 1000;
-			if ($game2['winner'] == $pos) $priority[0] += 1000;
-			elseif ($game2['winner'] == $pos+2) $priority[2] += 1000;
-			if ($game3['winner'] == $pos+1) $priority[1] += 1000;
-			elseif ($game3['winner'] == $pos+2) $priority[2] += 1000;
-			$first = 0;
-			$second = 0;
-			for ($i = 0; $i < count($priority); $i++) {
-				if ($priority[$i] > $first) {
-					$second = $first;
-					$first = $priority[$i];
-				}
-				elseif ($priority[$i] > $second) {
-					$second = $priority[$i];
-				}
-			}
-			if ($first == $priority[0]) {
-				array_push($rank2, $pos);
-				if ($second == $priority[1]) {
-					array_push($rank3, $pos+1);
-				}
-				elseif ($second == $priority[2]) {
-					array_push($rank3, $pos+2);
-				}
-			}
-			elseif ($first == $priority[1]) {
-				array_push($rank2, $pos+1);
-				if ($second == $priority[0]) {
-					array_push($rank3, $pos);
-				}
-				elseif ($second == $priority[2]) {
-					array_push($rank3, $pos+2);
-				}
-			}
-			elseif ($first == $priority[2]) {
-				array_push($rank2, $pos+2);
-				if ($second == $priority[0]) {
-					array_push($rank3, $pos);
-				}
-				elseif ($second == $priority[1]) {
-					array_push($rank3, $pos+1);
-				}
-			}
-		}
-		else {
-			array_push($rank2, NULL);
-			array_push($rank3, NULL);
-		}
+		$select_order = selectCycleTrianglePlayer($account, $gameno, $game, $pos, $gap, $playtype, 2);
+		array_push($rank2, array_shift($select_order));
+		array_push($rank3, array_shift($select_order));
 		$game++;
 		$pos += 3;
 	}
