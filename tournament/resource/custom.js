@@ -349,12 +349,10 @@ function update(gameno) {
 		var a = document.getElementById(i+"_above");
 		var b = document.getElementById(i+"_below");
 		if (a != null && b != null) {
-			// To distinguish "0" -> Ask for a leave and "" -> not set yet
-			if (a.value === "0" && b.value === "0") {
-				above[i] = "-2";
-				below[i] = "-2";
-			}
-			else if (a.value === "" && b.value === ""){
+			// To distinguish: 
+			//     "0" -> Ask for a leave 
+			//     "" -> not set yet
+			if (a.value === "" || b.value === ""){
 				above[i] = "-10";
 				below[i] = "-10";
 			}
