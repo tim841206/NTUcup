@@ -49,11 +49,15 @@ for ($i = 1; $i < count($above); $i++) {
 	elseif (($temp_above % 1000) < ($temp_below % 1000)) {
 		mysqli_query($mysql, "UPDATE GAMESTATE SET ABOVESCORE='$temp_above', BELOWSCORE='$temp_below', WINNER=BELOW WHERE USERNO='$account' AND GAMENO='$gameno' AND PLAYNO='$i'");
 	}
-	elseif ($temp_above < $temp_below) {
-		mysqli_query($mysql, "UPDATE GAMESTATE SET ABOVESCORE='$temp_above', BELOWSCORE='$temp_below', WINNER=BELOW WHERE USERNO='$account' AND GAMENO='$gameno' AND PLAYNO='$i'");
-	}
-	elseif ($temp_above == $temp_below && $temp_above != '') {
-		mysqli_query($mysql, "UPDATE GAMESTATE SET ABOVESCORE='$temp_above', BELOWSCORE='$temp_below', WINNER='-1' WHERE USERNO='$account' AND GAMENO='$gameno' AND PLAYNO='$i'");
+	// If total points won are the same in TEAM GAME ($playtype == 'C'),
+	// then compare total matches won to determine the winner.
+	elseif ($playtype == 'C' && ($temp_above % 1000) == ($temp_below % 1000)){
+		if (($temp_above / 1000) > ($temp_below / 1000)){
+			mysqli_query($mysql, "UPDATE GAMESTATE SET ABOVESCORE='$temp_above', BELOWSCORE='$temp_below', WINNER=ABOVE WHERE USERNO='$account' AND GAMENO='$gameno' AND PLAYNO='$i'");
+		}
+		else{
+			mysqli_query($mysql, "UPDATE GAMESTATE SET ABOVESCORE='$temp_above', BELOWSCORE='$temp_below', WINNER=BELOW WHERE USERNO='$account' AND GAMENO='$gameno' AND PLAYNO='$i'");
+		}
 	}
 
 	if ($gametype == 'A' || $i > $gap) {

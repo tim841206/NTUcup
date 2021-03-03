@@ -1149,8 +1149,17 @@ function updateGameChart($account, $gameno) {
 			$state = queryState($account, $gameno, $i);
 			if ($i <= $gap) {
 				if (is_numeric($state['aboveScore']) && is_numeric($state['belowScore'])) {
-					$publicContent = str_replace('id="'.$state['playno'].'_above">', 'id="'.$state['playno'].'_above">'.$state['aboveScore'], $publicContent);
-					$publicContent = str_replace('id="'.$state['playno'].'_below">', 'id="'.$state['playno'].'_below">'.$state['belowScore'], $publicContent);
+					// For Team Game, output total score to public user only.
+					//     Team Game : __ __ __ __
+					//                  |  |
+					//                  |  total points won
+					//                  total matches won
+					// Others, 
+					// MS,MD,WS,WD,XD: __ __
+					//                  |
+					//                  score
+					$publicContent = str_replace('id="'.$state['playno'].'_above">', 'id="'.$state['playno'].'_above">'.strval((int)$state['aboveScore'] % 1000), $publicContent);
+					$publicContent = str_replace('id="'.$state['playno'].'_below">', 'id="'.$state['playno'].'_below">'.strval((int)$state['belowScore'] % 1000), $publicContent);
 					$editContent = str_replace('id="'.$state['playno'].'_above">', 'id="'.$state['playno'].'_above" value="'.$state['aboveScore'].'">', $editContent);
 					$editContent = str_replace('id="'.$state['playno'].'_below">', 'id="'.$state['playno'].'_below" value="'.$state['belowScore'].'">', $editContent);
 				}
@@ -1158,8 +1167,8 @@ function updateGameChart($account, $gameno) {
 			else {
 				if (is_numeric($state['aboveScore']) && is_numeric($state['belowScore'])) {
 					$scoreInput = scoreInputPosition($i-$gap, $roundAmount);
-					$publicContent = str_replace('id="p'.$scoreInput['above'].'">', 'id="p'.$scoreInput['above'].'">'.$state['aboveScore'], $publicContent);
-					$publicContent = str_replace('id="p'.$scoreInput['below'].'">', 'id="p'.$scoreInput['below'].'">'.$state['belowScore'], $publicContent);
+					$publicContent = str_replace('id="p'.$scoreInput['above'].'">', 'id="p'.$scoreInput['above'].'">'.strval((int)$state['aboveScore'] % 1000), $publicContent);
+					$publicContent = str_replace('id="p'.$scoreInput['below'].'">', 'id="p'.$scoreInput['below'].'">'.strval((int)$state['belowScore'] % 1000), $publicContent);
 					$editContent = str_replace('id="'.$state['playno'].'_above">', 'id="'.$state['playno'].'_above" value="'.$state['aboveScore'].'">', $editContent);
 					$editContent = str_replace('id="'.$state['playno'].'_below">', 'id="'.$state['playno'].'_below" value="'.$state['belowScore'].'">', $editContent);
 					if ($state['aboveScore'] > $state['belowScore']) {
