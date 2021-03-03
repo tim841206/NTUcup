@@ -1285,11 +1285,13 @@ function updateGameState($account, $gameno) {
 
 
 // 0. Abstainee -> score -1; Ask for leave -> score 0
-// 1. Update tournament for MS, MD, WS, WD, XD. (GP's rule cannot match!!)
+// 1. Update tournament for MS, MD, WS, WD, XD, Group
 //    (1) winner -> 2, loser -> 1, abstainee -> remove from select list
 //    (2) Check if there are 2 or more teams have same points.
 //        (a) if 2 teams have same points -> compare their game results only
-//        (b) if 3 teams have same points -> compare their game results only, (total points won) - (total points lost)
+//        (b) if 3 teams have same points 
+//        		MS,MD,WS,WD,XD	-> compare same points teams' game results only, (total points won ) - (total points lose)
+//        		Group           -> compare same points teams' game results only, (total matches won) - (total matches lose)
 //        (c) if still cannot decide, select by random number.
 // 2. Push -1 to rank1 rank2 rank3, if "Bye".
 function selectCycleSquarePlayer($account, $gameno, $game, $pos, $gap, $playtype, $num_select) {
@@ -1456,78 +1458,111 @@ function selectCycleSquarePlayer($account, $gameno, $game, $pos, $gap, $playtype
 			}
 			// (2-3) Three or more are selected
 			elseif (count($max_pos) >= 3 && max($priority) != -1){
-				if ($playtype == 'C'){
-					// TODO: FOR TEAM GAME, NOT IMPLEMENT YET.
-				}
-				else{
-					// (b) if 3 teams have same priority -> compare their game results only, 
-					//     $score = (total points won) - (total points lost)
-					
-					// Find related teams score
-					$score = array(0,0,0,0);
+				// (b) if 3 teams have same priority -> compare same $priority points teams' game results only, 
+				//     GP ($playtype='C') -> $score = (total matches won) - (total matches lose)
+				//     MS,MD,WS,WD,XD     -> $score = (total points won) - (total points lose)
+				
+				// Find related teams score
+				$score = array(0,0,0,0);
 
-					// Calculate related teams score
-					for ($index1 = 0; $index1 < count($max_pos); $index1++){
-						for ($index2 = $index1+1; $index2 < count($max_pos); $index2++){
-							// Make $j > $i , and $i, $j are in $max_pos
-							$i = $max_pos[$index1];
-							$j = $max_pos[$index2];
+				// Calculate related teams score
+				for ($index1 = 0; $index1 < count($max_pos); $index1++){
+					for ($index2 = $index1+1; $index2 < count($max_pos); $index2++){
+						// Make $j > $i , and $i, $j are in $max_pos
+						$i = $max_pos[$index1];
+						$j = $max_pos[$index2];
 
-							// Calculate related score
-							if ($i == 0 && $j == 1){
+						// Calculate related score
+						if ($i == 0 && $j == 1){
+							if ($playtype == 'C'){
+								$score[$i] = $score[$i] + intdiv($game1['aboveScore'], 1000) - intdiv($game1['belowScore'], 1000);
+								$score[$j] = $score[$j] + intdiv($game1['belowScore'], 1000) - intdiv($game1['aboveScore'], 1000);
+							}
+							else{
 								$score[$i] = $score[$i] + $game1['aboveScore'] - $game1['belowScore'];
 								$score[$j] = $score[$j] + $game1['belowScore'] - $game1['aboveScore'];
 							}
-							elseif ($i == 0 && $j == 2){
+						}
+						elseif ($i == 0 && $j == 2){
+							if ($playtype == 'C'){
+								$score[$i] = $score[$i] + intdiv($game3['aboveScore'], 1000) - intdiv($game3['belowScore'], 1000);
+								$score[$j] = $score[$j] + intdiv($game3['belowScore'], 1000) - intdiv($game3['aboveScore'], 1000);
+							}
+							else{
 								$score[$i] = $score[$i] + $game3['aboveScore'] - $game3['belowScore'];
 								$score[$j] = $score[$j] + $game3['belowScore'] - $game3['aboveScore'];
 							}
-							elseif ($i == 0 && $j == 3){
+						}
+						elseif ($i == 0 && $j == 3){
+							if ($playtype == 'C'){
+								$score[$i] = $score[$i] + intdiv($game5['aboveScore'], 1000) - intdiv($game5['belowScore'], 1000);
+								$score[$j] = $score[$j] + intdiv($game5['belowScore'], 1000) - intdiv($game5['aboveScore'], 1000);
+							}
+							else{
 								$score[$i] = $score[$i] + $game5['aboveScore'] - $game5['belowScore'];
 								$score[$j] = $score[$j] + $game5['belowScore'] - $game5['aboveScore'];
 							}
-							elseif ($i == 1 && $j == 2){
+						}
+						elseif ($i == 1 && $j == 2){
+							if ($playtype == 'C'){
+								$score[$i] = $score[$i] + intdiv($game6['aboveScore'], 1000) - intdiv($game6['belowScore'], 1000);
+								$score[$j] = $score[$j] + intdiv($game6['belowScore'], 1000) - intdiv($game6['aboveScore'], 1000);
+							}
+							else{
 								$score[$i] = $score[$i] + $game6['aboveScore'] - $game6['belowScore'];
 								$score[$j] = $score[$j] + $game6['belowScore'] - $game6['aboveScore'];
 							}
-							elseif ($i == 1 && $j == 3){
+						}
+						elseif ($i == 1 && $j == 3){
+							if ($playtype == 'C'){
+								$score[$i] = $score[$i] + intdiv($game4['aboveScore'], 1000) - intdiv($game4['belowScore'], 1000);
+								$score[$j] = $score[$j] + intdiv($game4['belowScore'], 1000) - intdiv($game4['aboveScore'], 1000);
+							}
+							else{
 								$score[$i] = $score[$i] + $game4['aboveScore'] - $game4['belowScore'];
 								$score[$j] = $score[$j] + $game4['belowScore'] - $game4['aboveScore'];
 							}
-							elseif ($i == 2 && $j == 3){
+						}
+						elseif ($i == 2 && $j == 3){
+							if ($playtype == 'C'){
+								$score[$i] = $score[$i] + intdiv($game2['aboveScore'], 1000) - intdiv($game2['belowScore'], 1000);
+								$score[$j] = $score[$j] + intdiv($game2['belowScore'], 1000) - intdiv($game2['aboveScore'], 1000);
+							}
+							else{
 								$score[$i] = $score[$i] + $game2['aboveScore'] - $game2['belowScore'];
 								$score[$j] = $score[$j] + $game2['belowScore'] - $game2['aboveScore'];
 							}
 						}
 					}
-
-					// Pick each related team's score = (Points WON) - (Points LOSE)
-					$max_pos_score = array();
-					for ($i = 0; $i < count($max_pos); $i++){
-						array_push($max_pos_score, $score[$max_pos[$i]]);
-					}
-
-					// Select player, until all of them are chosen or no more $num_select 
-					while(max($max_pos_score) != -3000 && $num_select > 0){
-
-						// Select through related team score = (Points WON) - (Points LOSE)
-						$max_pos_score_index = array_keys($max_pos_score, max($max_pos_score));
-
-						if (count($max_pos_score_index) == 1){
-							$select_pos = $max_pos[array_pop($max_pos_score_index)];
-						}
-						else{
-							// (c) if still cannot decide, select by random number.
-							srand($pos + $gap + $num_select);
-							$select_pos = $max_pos[$max_pos_score_index[rand() % count($max_pos_score_index)]];
-						}
-
-						array_push($select_order, $pos + $select_pos);
-						$num_select = $num_select - 1;
-						$priority[$select_pos] = -1;
-						$max_pos_score[array_search($select_pos, $max_pos)] = -3000;
-					}
 				}
+
+				// Pick each related team's score
+				$max_pos_score = array();
+				for ($i = 0; $i < count($max_pos); $i++){
+					array_push($max_pos_score, $score[$max_pos[$i]]);
+				}
+
+				// Select player, until all of them are chosen or no more $num_select 
+				while(max($max_pos_score) != -3000 && $num_select > 0){
+
+					// Select through related team score
+					$max_pos_score_index = array_keys($max_pos_score, max($max_pos_score));
+
+					if (count($max_pos_score_index) == 1){
+						$select_pos = $max_pos[array_pop($max_pos_score_index)];
+					}
+					else{
+						// (c) if still cannot decide, select by random number.
+						srand($pos + $gap + $num_select);
+						$select_pos = $max_pos[$max_pos_score_index[rand() % count($max_pos_score_index)]];
+					}
+
+					array_push($select_order, $pos + $select_pos);
+					$num_select = $num_select - 1;
+					$priority[$select_pos] = -1;
+					$max_pos_score[array_search($select_pos, $max_pos)] = -3000;
+				}
+				continue;
 			}
 			else{
 				break;
@@ -1591,8 +1626,10 @@ function selectCycleTrianglePlayer($account, $gameno, $game, $pos, $gap, $playty
 				// Skip if encounter myself or abstainee
 				if ($i == $j || $priority[$j] == -1) continue;
 
-				// Calculate priority and score = (Points WON) - (Points LOSE)
+				// Calculate priority and score.
 				// We can calculate score first, since only when all are considered, we will be using it.
+				//     GP ($playtype='C') -> $score = (total matches won) - (total matches lose)
+				//     MS,MD,WS,WD,XD     -> $score = (total points won) - (total points lose)
 				if ($i == 0 && $j == 1){
 					if ($game1['winner'] == $game1['above']){
 						$priority[$i] = $priority[$i] + 2;
@@ -1602,8 +1639,14 @@ function selectCycleTrianglePlayer($account, $gameno, $game, $pos, $gap, $playty
 						$priority[$j] = $priority[$j] + 2;
 						$priority[$i] = $priority[$i] + 1;
 					}
-					$score[$i] = $score[$i] + $game1['aboveScore'] - $game1['belowScore'];
-					$score[$j] = $score[$j] + $game1['belowScore'] - $game1['aboveScore'];
+					if ($playtype == 'C'){
+						$score[$i] = $score[$i] + intdiv($game1['aboveScore'], 1000) - intdiv($game1['belowScore'], 1000);
+						$score[$j] = $score[$j] + intdiv($game1['belowScore'], 1000) - intdiv($game1['aboveScore'], 1000);
+					}
+					else{
+						$score[$i] = $score[$i] + $game1['aboveScore'] - $game1['belowScore'];
+						$score[$j] = $score[$j] + $game1['belowScore'] - $game1['aboveScore'];
+					}
 				}
 				elseif ($i == 0 && $j == 2){
 					if ($game2['winner'] == $game2['above']){
@@ -1614,8 +1657,14 @@ function selectCycleTrianglePlayer($account, $gameno, $game, $pos, $gap, $playty
 						$priority[$j] = $priority[$j] + 2;
 						$priority[$i] = $priority[$i] + 1;
 					}
-					$score[$i] = $score[$i] + $game2['aboveScore'] - $game2['belowScore'];
-					$score[$j] = $score[$j] + $game2['belowScore'] - $game2['aboveScore'];
+					if ($playtype == 'C'){
+						$score[$i] = $score[$i] + intdiv($game2['aboveScore'], 1000) - intdiv($game2['belowScore'], 1000);
+						$score[$j] = $score[$j] + intdiv($game2['belowScore'], 1000) - intdiv($game2['aboveScore'], 1000);
+					}
+					else{
+						$score[$i] = $score[$i] + $game2['aboveScore'] - $game2['belowScore'];
+						$score[$j] = $score[$j] + $game2['belowScore'] - $game2['aboveScore'];
+					}
 				}
 				elseif ($i == 1 && $j == 2){
 					if ($game3['winner'] == $game3['above']){
@@ -1626,8 +1675,14 @@ function selectCycleTrianglePlayer($account, $gameno, $game, $pos, $gap, $playty
 						$priority[$j] = $priority[$j] + 2;
 						$priority[$i] = $priority[$i] + 1;
 					}
-					$score[$i] = $score[$i] + $game3['aboveScore'] - $game3['belowScore'];
-					$score[$j] = $score[$j] + $game3['belowScore'] - $game3['aboveScore'];
+					if ($playtype == 'C'){
+						$score[$i] = $score[$i] + intdiv($game3['aboveScore'], 1000) - intdiv($game3['belowScore'], 1000);
+						$score[$j] = $score[$j] + intdiv($game3['belowScore'], 1000) - intdiv($game3['aboveScore'], 1000);
+					}
+					else{
+						$score[$i] = $score[$i] + $game3['aboveScore'] - $game3['belowScore'];
+						$score[$j] = $score[$j] + $game3['belowScore'] - $game3['aboveScore'];
+					}
 				}
 			}
 		}
@@ -1674,17 +1729,16 @@ function selectCycleTrianglePlayer($account, $gameno, $game, $pos, $gap, $playty
 			}
 			// (2-3) Three are selected
 			elseif (count($max_pos) == 3 && max($priority) != -1){
-				if ($playtype == 'C'){
-					// TODO: FOR TEAM GAME, NOT IMPLEMENT YET.
+				// (b) if 3 teams have same $priority points -> compare their game results only
+				$max_pos_score = array(0, 0, 0);
+				for ($i = 0; $i < 3; $i++){
+					$max_pos_score[$i] = $score[$max_pos[$i]];
 				}
-				else{
-					// (b) if 3 teams have same points -> compare their game results only, 
-					//     $score = (total points won) - (total points lost)
-					$max_pos_score = array(0, 0, 0);
-					for ($i = 0; $i < 3; $i++){
-						$max_pos_score[$i] = $score[$max_pos[$i]];
-					}
+				
+				// Select player, until all of them are chosen or no more $num_select
+				while(max($max_pos_score) != -3000 && $num_select > 0){
 					$max_pos_score_index = array_keys($max_pos_score, max($max_pos_score));
+
 					if(count($max_pos_score_index) == 1){
 						$select_pos = $max_pos[array_pop($max_pos_score_index)];
 					}
@@ -1695,9 +1749,10 @@ function selectCycleTrianglePlayer($account, $gameno, $game, $pos, $gap, $playty
 					}
 					array_push($select_order, $pos + $select_pos);
 					$num_select = $num_select - 1;
-					$score[$select_pos] = -3000;
-					continue;
+					$priority[$select_pos] = -1;
+					$max_pos_score[array_search($select_pos, $max_pos)] = -3000;
 				}
+				continue;
 			}
 			else{
 				break;
