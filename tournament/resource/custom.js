@@ -60,7 +60,7 @@ function logout() {
 	}
 }
 
-function swap() {
+function swap(gameno) {
 	document.getElementById("cover").style.display = "block";
 	var above = [];
 	above[0] = 'skip';
@@ -349,8 +349,17 @@ function update(gameno) {
 		var a = document.getElementById(i+"_above");
 		var b = document.getElementById(i+"_below");
 		if (a != null && b != null) {
-			above[i] = a.value;
-			below[i] = b.value;
+			// To distinguish: 
+			//     "0" -> Ask for a leave 
+			//     "" -> not set yet
+			if (a.value === "" || b.value === ""){
+				above[i] = "-10";
+				below[i] = "-10";
+			}
+			else{
+				above[i] = a.value;
+				below[i] = b.value;
+			}
 		}
 		else {
 			again = false;
