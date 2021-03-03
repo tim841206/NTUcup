@@ -1219,12 +1219,15 @@ function updateGameChart($account, $gameno) {
 					$publicContent = str_replace('id="p'.$scoreInput['below'].'">', 'id="p'.$scoreInput['below'].'">'.strval((int)$state['belowScore'] % 1000), $publicContent);
 					$editContent = str_replace('id="'.$state['playno'].'_above">', 'id="'.$state['playno'].'_above" value="'.$state['aboveScore'].'">', $editContent);
 					$editContent = str_replace('id="'.$state['playno'].'_below">', 'id="'.$state['playno'].'_below" value="'.$state['belowScore'].'">', $editContent);
-					if ($state['aboveScore'] > $state['belowScore']) {
+					if (strval($state['winner']) == "-1"){
+						// Do nothing
+					}
+					elseif (strval($state['winner']) == strval($state['above'])) {
 						$return = updateAbove($i-$gap, $publicContent, $editContent, $roundAmount);
 						$publicContent = $return['public'];
 						$editContent = $return['edit'];
 					}
-					elseif ($state['aboveScore'] < $state['belowScore']) {
+					elseif (strval($state['winner']) == strval($state['below'])) {
 						$return = updateBelow($i-$gap, $publicContent, $editContent, $roundAmount);
 						$publicContent = $return['public'];
 						$editContent = $return['edit'];
